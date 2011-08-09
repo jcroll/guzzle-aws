@@ -106,6 +106,9 @@ class S3ClientTest extends \Guzzle\Tests\GuzzleTestCase
 
         $request = $client->getS3Request('GET', 'test', 'key');
         $this->assertEquals('http://test.s3.amazonaws.com/key', $request->getUrl());
+
+        $request = $client->getS3Request('GET', 'test', 'path/to/key');
+        $this->assertEquals('http://test.s3.amazonaws.com/path/to/key', $request->getUrl());
     }
 
     /**

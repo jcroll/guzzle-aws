@@ -233,7 +233,7 @@ class S3Client extends AbstractClient
             if (strcmp($url[strlen($url) - 1], '/')) {
                 $url .= '/';
             }
-            $url .= rawurlencode($key);
+            $url .= $key;
         }
 
         $request->setUrl($url);
