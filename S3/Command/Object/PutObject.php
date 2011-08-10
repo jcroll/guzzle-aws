@@ -43,7 +43,7 @@ class PutObject extends AbstractRequestObjectPut
 
         // Add the checksum to the PUT
         if ($this->validateChecksum) {
-            $this->request->setHeader('Content-MD5', $this->get('body')->getContentMd5());
+            $this->request->setHeader('Content-MD5', $this->get('body')->getContentMd5(true, true));
         }
     }
 

@@ -42,14 +42,14 @@ class PutObjectTest extends \Guzzle\Tests\GuzzleTestCase
             'Host' => 'test.s3.amazonaws.com',
             'Date' => '*',
             'Content-Length' => '4',
-            'Content-MD5' =>  '8d777f385d3dfec8815d20f7496026dc',
+            'Content-MD5' =>  'jXd/OF09/siBXSD3SWAm3A==',
             'Authorization' => '*',
             'x-amz-test' => '123',
             'x-amz-acl' => 'public-read',
             'x-amz-storage-class' => 'STANDARD',
             'User-Agent' => Guzzle::getDefaultUserAgent(),
             'Expect' => '100-Continue'
-        ), $command->getRequestHeaders()->getAll()));
+        ), $command->prepare()->getHeaders()->getAll()));
 
         $this->assertEquals('data', (string) $command->getRequest()->getBody());
     }
