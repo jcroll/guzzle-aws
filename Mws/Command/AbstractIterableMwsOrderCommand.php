@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -14,6 +15,7 @@ namespace Guzzle\Aws\Mws\Command;
  */
 class AbstractIterableMwsOrderCommand extends AbstractMwsOrderCommand
 {
+
     /**
      * @var string Result node name
      */

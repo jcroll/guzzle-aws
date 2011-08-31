@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #8 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+    <!-- include amazon types -->
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    
+    <!-- define test elements of each type -->
+    <xsd:element name="AmperageDimension" type="AmperageDimension" />
+    <xsd:element name="ClothingSizeDimension" type="ClothingSizeDimension" />
+    <xsd:element name="ConditionInfo" type="ConditionInfo" />
+    <xsd:element name="CurrencyAmount" type="CurrencyAmount" />
+    <xsd:element name="DatedPrice" type="DatedPrice" />
+    <xsd:element name="DegreeDimension" type="DegreeDimension" />
+    <xsd:element name="Dimensions" type="Dimensions" />
+    <xsd:element name="LengthDimension" type="LengthDimension" />
+    <xsd:element name="PressureDimension" type="PressureDimension" />
+    <xsd:element name="RebateType" type="RebateType" />
+    <xsd:element name="SpatialDimensions" type="SpatialDimensions" />
+    <xsd:element name="TemperatureRatingDimension" type="TemperatureRatingDimension" />
+    <xsd:element name="VolumeDimension" type="VolumeDimension" />
+    <xsd:element name="WattageDimension" type="WattageDimension" />
+    <xsd:element name="WeightDimension" type="WeightDimension" />
+</xsd:schema>

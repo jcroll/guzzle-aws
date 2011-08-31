@@ -24,8 +24,5 @@ class MwsClientTest extends GuzzleTestCase
             'application_name' => 'GuzzleTest',
             'application_version' => '0.1'
         ));
-
-        $feed = $client->getFeed('order_fulfillment');
-        $this->assertInstanceOf('Guzzle\Aws\Mws\Model\Feed\OrderFulfillment', $feed);
     }
 }

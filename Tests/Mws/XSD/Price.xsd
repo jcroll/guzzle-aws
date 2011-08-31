@@ -1,0 +1,25 @@
+<?xml version="1.0" ?> 
+<!-- Revision="$Revision: #3 $" --> 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xsd:include schemaLocation="amzn-base.xsd" /> 
+    <xsd:element name="Price">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="SKU" /> 
+                <xsd:element name="StandardPrice" type="OverrideCurrencyAmount" /> 
+                <xsd:element name="MAP" type="OverrideCurrencyAmount" minOccurs="0" /> 
+                <xsd:element name="DepositAmount" type="CurrencyAmountWithDefault" minOccurs="0" /> 
+                <xsd:element name="Sale" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="StartDate" type="xsd:dateTime" /> 
+                            <xsd:element name="EndDate" type="xsd:dateTime" /> 
+                            <xsd:element name="SalePrice" type="OverrideCurrencyAmount" /> 
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Previous" type="DatedPrice" minOccurs="0" /> 
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

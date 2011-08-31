@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -7,7 +8,6 @@
 namespace Guzzle\Aws\Mws\Model\Feed;
 
 use Guzzle\Aws\Mws\MwsClient;
-use Guzzle\Common\XmlElement;
 
 /**
  * Abstract feed class
@@ -19,15 +19,27 @@ use Guzzle\Common\XmlElement;
  */
 abstract class AbstractFeed
 {
+
     /**
      * @var MwsClient
      */
     protected $client;
-
     /**
-     * @var XmlElement
+     * @var XMLWriter
      */
     protected $xml;
+    /**
+     * @var string Feed type
+     */
+    protected $feedType;
+    /**
+     * @var int Message counter
+     */
+    protected $messageCount = 1;
+    /**
+     * @var string XML output
+     */
+    protected $output;
 
     /**
      * Init feed with shared properties
@@ -38,40 +50,33 @@ abstract class AbstractFeed
     {
         $this->client = $client;
 
-        $this->xml = new XmlElement('<AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd" />');
+        $this->xml = new \XMLWriter();
+        $this->xml->openMemory();
+        $this->xml->setIndent(true);
+        $this->xml->setIndentString("\t");
+        $this->xml->startDocument('1.0', 'UTF-8');
+        $this->xml->startElement('AmazonEnvelope');
+        $this->xml->writeAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        $this->xml->writeAttribute('xsi:noNamespaceSchemaLocation', 'amzn-envelope.xsd');
 
-        $header = $this->xml->addChild('Header');
-        $header->addChild('DocumentVersion', '1.01');
-        $header->addChild('MerchantIdentifier', $client->getConfig('merchant_id'));
+        // Header
+        $this->xml->startElement('Header');
+        $this->xml->writeElement('DocumentVersion', '1.01');
+        $this->xml->writeElement('MerchantIdentifier', $client->getConfig('merchant_id'));
+        $this->xml->endElement();
 
-        $this->xml->addChild('MessageType');
-        //$this->xml->addChild('PurgeAndReplace', 'false');
-        //$this->xml->addChild('Message');
-
-        $this->init();
+        $this->xml->writeElement('MessageType', $this->feedType);
+        $this->xml->writeElement('PurgeAndReplace', 'false');
     }
 
     /**
-     * Initialize feed
-     *
-     * @codeCoverageIgnore
+     * Get XMLWriter instance
+     * 
+     * @return XMLWriter
      */
-    public function init()
+    public function getXml()
     {
-    }
-    
-    /**
-     * Set purge and replace value
-     *
-     * @param <type> $purgeAndReplace
-     *
-     * @return AbstractFeed
-     */
-    public function setPurgeAndReplace($purgeAndReplace)
-    {
-        $this->xml->PurgeAndReplace = $purgeAndReplace;
-
-        return $this;
+        return $this->xml;
     }
 
     /**
@@ -81,12 +86,15 @@ abstract class AbstractFeed
      */
     public function toString()
     {
-        $xml = $this->xml->asXML();
-        $doc = new \DOMDocument();
-        $doc->formatOutput = true;
-        $doc->loadXML($xml);
+        if (!$this->output) {
+            $this->xml->endDocument();
+            $this->output = $this->xml->outputMemory(true);
+        }
         
-        return $doc->saveXML();
+        // Remove empty elements
+        $this->output = preg_replace('#<[^>]*/>#', '', $this->output);
+        
+        return $this->output;
     }
 
     /**
@@ -98,4 +106,5 @@ abstract class AbstractFeed
     {
         return $this->toString();
     }
+
 }

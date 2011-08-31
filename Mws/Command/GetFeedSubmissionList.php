@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -32,16 +33,15 @@ namespace Guzzle\Aws\Mws\Command;
  */
 class GetFeedSubmissionList extends AbstractIterableMwsCommand
 {
+
     /**
      * {@inheritdoc}
      */
     protected $action = 'GetFeedSubmissionList';
-
     /**
      * {@inheritdoc}
      */
     protected $recordPath = 'FeedSubmissionInfo';
-
 
     /**
      * Set feed submission id list
@@ -120,4 +120,5 @@ class GetFeedSubmissionList extends AbstractIterableMwsCommand
     {
         return $this->set('submitted_to_date', $submittedToDate);
     }
+
 }

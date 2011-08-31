@@ -64,7 +64,7 @@ class AddPermission extends AbstractQueueUrlCommand
      *
      * @return AddPermission
      */
-    public function addPermission($account, $action)
+    public function addPerm($account, $action)
     {
         return $this->add('permissions', array(
             'account' => $account,

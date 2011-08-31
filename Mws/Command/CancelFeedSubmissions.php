@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -29,6 +30,7 @@ namespace Guzzle\Aws\Mws\Command;
  */
 class CancelFeedSubmissions extends AbstractMwsCommand
 {
+
     /**
      * {@inheritdoc}
      */
@@ -85,4 +87,5 @@ class CancelFeedSubmissions extends AbstractMwsCommand
     {
         return $this->set('submitted_to_date', $submittedToDate);
     }
+
 }

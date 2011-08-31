@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -16,6 +17,7 @@ namespace Guzzle\Aws\Mws\Command;
  */
 class AbstractMwsOrderCommand extends AbstractMwsCommand
 {
+
     /**
      * Build the HTTP request
      */
@@ -28,4 +30,5 @@ class AbstractMwsOrderCommand extends AbstractMwsCommand
         // Copy Merchant parameter to SellerId, because Amazon is stupid and can't even follow their own standards
         $this->getRequest()->getQuery()->set('SellerId', $this->getRequest()->getQuery()->get('Merchant'));
     }
+
 }

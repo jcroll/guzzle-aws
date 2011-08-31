@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -22,16 +23,15 @@ use Guzzle\Common\XmlElement;
  */
 class AbstractMwsCommand extends AbstractCommand
 {
+
     /**
      * @var string MWS operation name
      */
     protected $action;
-
     /**
      * @var string HTTP request method
      */
     protected $requestMethod = RequestInterface::GET;
-
     /**
      * @var string xpath query to records in result
      */
@@ -62,15 +62,15 @@ class AbstractMwsCommand extends AbstractCommand
             ->set('Merchant', $config['merchant_id']);
 
         // Add any additional method params
-        foreach($this->data as $param => $value) {
+        foreach ($this->data as $param => $value) {
             if ($param == 'headers') {
                 continue;
             }
             $param = ucfirst(Inflector::camel($param));
             if (is_array($value)) {
                 // It's an array, convert to amazon array naming convention
-                foreach($value as $listName => $listValues) {
-                    foreach($listValues as $i => $listValue) {
+                foreach ($value as $listName => $listValues) {
+                    foreach ($listValues as $i => $listValue) {
                         $this->request->getQuery()->set($param . '.' . $listName . '.' . ($i + 1), $listValue);
                     }
                 }
@@ -125,7 +125,7 @@ class AbstractMwsCommand extends AbstractCommand
                 }
 
                 // Get next token unless HasNext property is set to false
-                $nextToken = (string)$this->result->NextToken;
+                $nextToken = (string) $this->result->NextToken;
                 if (!empty($this->result->HasNext)) {
                     if ($this->result->HasNext == 'false') {
                         $nextToken = null;
@@ -133,20 +133,19 @@ class AbstractMwsCommand extends AbstractCommand
                 }
 
                 $this->result = new ResultIterator($this->getClient(), array(
-                    'next_token'    => $nextToken,
-                    'next_command'  => $nextCommand,
-                    'resources'     => $records,
-                    'result_node'   => $resultNode,
-                    'record_path'   => $this->recordPath
-                ));
-                
+                        'next_token' => $nextToken,
+                        'next_command' => $nextCommand,
+                        'resources' => $records,
+                        'result_node' => $resultNode,
+                        'record_path' => $this->recordPath
+                    ));
             } else if (!empty($this->recordPath)) {
                 $this->result = $this->result->xpath($this->recordPath);
             }
-
         } else if ($this->result->getContentType() == 'application/octet-stream') {
             // Get CSV data array
             $this->result = new CsvReport($this->getResponse()->getBody(true));
         }
     }
+
 }

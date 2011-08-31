@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -30,6 +31,7 @@ namespace Guzzle\Aws\Mws\Command;
  */
 class CancelReportRequests extends AbstractMwsCommand
 {
+
     /**
      * {@inheritdoc}
      */
@@ -100,4 +102,5 @@ class CancelReportRequests extends AbstractMwsCommand
     {
         return $this->set('requested_to_date', $requestedToDate);
     }
+
 }

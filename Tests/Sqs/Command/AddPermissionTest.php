@@ -20,8 +20,8 @@ class AddPermissionTest extends \Guzzle\Tests\GuzzleTestCase
     {
         $command = new AddPermission();
         $this->assertSame($command, $command->setQueueUrl('http://sqs.us-east-1.amazonaws.com/123456789012/testQueue'));
-        $this->assertSame($command, $command->addPermission('123', 'SendMessage'));
-        $this->assertSame($command, $command->addPermission('123', 'ReceiveMessage'));
+        $this->assertSame($command, $command->addPerm('123', 'SendMessage'));
+        $this->assertSame($command, $command->addPerm('123', 'ReceiveMessage'));
         $this->assertSame($command, $command->setLabel('Test'));
 
         $client = $this->getServiceBuilder()->get('test.sqs');

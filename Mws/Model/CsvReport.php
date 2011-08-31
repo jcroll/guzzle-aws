@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -23,11 +24,11 @@ use \UnexpectedValueException;
  */
 class CsvReport implements IteratorAggregate, Countable
 {
+
     /**
      * @var array Row data
      */
     protected $rows = array();
-
     /**
      * @var array Field names
      */
@@ -44,20 +45,17 @@ class CsvReport implements IteratorAggregate, Countable
     public function __construct($data)
     {
         if (is_array($data)) {
-            
+
             if (!isset($data[0])) {
-                // @codeCoverageIgnoreStart
                 throw new InvalidArgumentException('Data rows must be numerically keyed');
-                // @codeCoverageIgnoreEnd
             }
             $this->fieldNames = array_keys($data[0]);
             $this->rows = $data;
-
         } else if (is_string($data)) {
-            
+
             // Split rows by newlines
             $this->rows = str_getcsv($data, "\n");
-            foreach($this->rows as &$row) {
+            foreach ($this->rows as &$row) {
                 // Split columns by tab
                 $row = str_getcsv($row, "\t");
             }
@@ -66,13 +64,13 @@ class CsvReport implements IteratorAggregate, Countable
             $this->fieldNames = array_shift($this->rows);
 
             // Iterate over remaining rows, parse into columns
-            foreach($this->rows as $i => &$row) {
+            foreach ($this->rows as $i => &$row) {
                 if (count($this->fieldNames) != count($row)) {
-                    throw new UnexpectedValueException('Error parsing row ' . $i);
+                    //throw new UnexpectedValueException('Error parsing row ' . $i);
+                    continue;
                 }
                 $row = array_combine($this->fieldNames, $row);
             }
-            
         } else {
             throw new InvalidArgumentException(
                 '$data must be a string or an array'
@@ -142,10 +140,11 @@ class CsvReport implements IteratorAggregate, Countable
         // Make the first line of the CSV the columns
         $out = implode("\t", $this->getFieldNames()) . PHP_EOL;
         // Add each row to the CSV
-        foreach($this->rows as $row) {
+        foreach ($this->rows as $row) {
             $out .= implode("\t", $row) . PHP_EOL;
         }
-        
+
         return trim($out);
     }
+
 }

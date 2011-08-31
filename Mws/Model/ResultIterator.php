@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Guzzle PHP <http://www.guzzlephp.org>
  * @license See the LICENSE file that was distributed with this source code.
@@ -19,6 +20,7 @@ use Guzzle\Service\ResourceIterator;
  */
 class ResultIterator extends ResourceIterator
 {
+
     /**
      * Send request to get the next page of results
      */
@@ -26,7 +28,7 @@ class ResultIterator extends ResourceIterator
     {
         // Throttle requests by waiting 1 second
         sleep(1);
-        
+
         $command = $this->client->getCommand($this->data['next_command'])
             ->setNextToken($this->getNextToken());
         $response = $this->client->execute($command);
@@ -47,7 +49,7 @@ class ResultIterator extends ResourceIterator
             $records = $result->xpath($this->data['record_path']);
         }
         // @codeCoverageIgnoreEnd
-        
+
         $this->resourceList = $records;
         $this->retrievedCount += count($this->resourceList);
         $this->currentIndex = 0;
@@ -60,4 +62,5 @@ class ResultIterator extends ResourceIterator
         }
         // @codeCoverageIgnoreEnd
     }
+
 }
