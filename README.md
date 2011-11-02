@@ -30,10 +30,7 @@ will take care of autoloading Guzzle classes:
 
 ## Testing
 
-Enter the full path to your Guzzle installation in the GUZZLE server parameter of the phpunit.xml.dist file.
-
-You will be prompted for the full path to your git clone of the main Guzzle
-framework.
+Copy phpunit.xml.dist to phpunit.xml.  Enter the full path to your Guzzle installation in the GUZZLE server parameter of the phpunit.xml file.
 
 ### More information
 
