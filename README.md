@@ -30,9 +30,7 @@ will take care of autoloading Guzzle classes:
 
 ## Testing
 
-Run the phing build script to configure your project for PHPUnit testing:
-
-    phing
+Enter the full path to your Guzzle installation in the GUZZLE server parameter of the phpunit.xml.dist file.
 
 You will be prompted for the full path to your git clone of the main Guzzle
 framework.
