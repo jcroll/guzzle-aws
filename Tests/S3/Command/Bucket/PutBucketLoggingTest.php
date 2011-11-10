@@ -25,7 +25,7 @@ class PutBucketLoggingTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->addGrant(S3Client::GRANT_TYPE_GROUP, S3Client::GRANT_ALL, S3Client::GRANT_READ_ACP));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketLoggingResponse');
+        $this->setMockResponse($client, 's3/PutBucketLoggingResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();
@@ -44,7 +44,7 @@ class PutBucketLoggingTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->disableLogging());
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketLoggingResponse');
+        $this->setMockResponse($client, 's3/PutBucketLoggingResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();

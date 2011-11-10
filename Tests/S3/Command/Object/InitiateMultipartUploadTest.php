@@ -30,7 +30,7 @@ class InitiateMultipartUploadTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setStorageClass('STANDARD');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'InitiateMultipartUploadResponse');
+        $this->setMockResponse($client, 's3/InitiateMultipartUploadResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();

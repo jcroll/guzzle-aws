@@ -13,7 +13,7 @@ class ListOrderItemsTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'ListOrderItemsResponse');
+        $this->setMockResponse($client, 'mws/ListOrderItemsResponse');
 
         $command = $client->getCommand('list_order_items')
             ->setAmazonOrderId('104-1917270-6910603');

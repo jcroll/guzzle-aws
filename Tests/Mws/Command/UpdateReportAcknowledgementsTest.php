@@ -15,7 +15,7 @@ class UpdateReportAcknowledgementsTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'UpdateReportAcknowledgementsResponse');
+        $this->setMockResponse($client, 'mws/UpdateReportAcknowledgementsResponse');
 
         $command = $client->getCommand('update_report_acknowledgements')
             ->setReportIdList(array(

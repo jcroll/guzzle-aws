@@ -31,7 +31,7 @@ class PutObjectTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setStorageClass('STANDARD');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutObjectResponse');
+        $this->setMockResponse($client, 's3/PutObjectResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();
@@ -65,7 +65,7 @@ class PutObjectTest extends \Guzzle\Tests\GuzzleTestCase
         $command->disableChecksumValidation();
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutObjectResponse');
+        $this->setMockResponse($client, 's3/PutObjectResponse');
         $client->execute($command);
 
         $this->assertFalse($command->getRequestHeaders()->hasKey('Content-MD5'));

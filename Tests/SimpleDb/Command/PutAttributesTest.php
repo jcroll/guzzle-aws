@@ -76,7 +76,7 @@ class PutAttributesTest extends \Guzzle\Tests\GuzzleTestCase
         $command->addExpected('attr_1', 'value_1', true);
         $command->addExpected('attr_2', 'value_2', true);
         $command->addAttribute('attr_1', 'new_value', true);
-        $this->setMockResponse($client, 'PutAttributesResponse');
+        $this->setMockResponse($client, 'sdb/PutAttributesResponse');
         $client->execute($command);
 
         $this->assertContains(

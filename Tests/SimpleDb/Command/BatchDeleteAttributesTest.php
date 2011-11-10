@@ -31,7 +31,7 @@ class BatchDeleteAttributesTest extends \Guzzle\Tests\GuzzleTestCase
             'color' => array('pink', 'fuscia')
         ));
 
-        $this->setMockResponse($client, 'BatchDeleteAttributesResponse');
+        $this->setMockResponse($client, 'sdb/BatchDeleteAttributesResponse');
         $client->execute($command);
 
         $this->assertContains('/?Action=BatchDeleteAttributes&DomainName=test&Item.1.ItemName=JumboFez&Item.1.Attribute.0.Name=color&Item.1.Attribute.0.Value=red&Item.1.Attribute.1.Name=color&Item.1.Attribute.1.Value=brick&Item.1.Attribute.2.Name=color&Item.1.Attribute.2.Value=garnet&Item.2.ItemName=PetiteFez&Item.2.Attribute.0.Name=color&Item.2.Attribute.0.Value=pink&Item.2.Attribute.1.Name=color&Item.2.Attribute.1.Value=fuscia', $command->getRequest()->getResourceUri());

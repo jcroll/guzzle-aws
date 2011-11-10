@@ -15,7 +15,7 @@ class GetReportScheduleCountTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'GetReportScheduleCountResponse');
+        $this->setMockResponse($client, 'mws/GetReportScheduleCountResponse');
 
         $command = $client->getCommand('get_report_schedule_count')
             ->setReportTypeList(array(

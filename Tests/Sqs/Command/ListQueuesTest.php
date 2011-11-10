@@ -22,7 +22,7 @@ class ListQueuesTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setQueueNamePrefix('test'));
         
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'ListQueuesResponse');
+        $this->setMockResponse($client, 'sqs/ListQueuesResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

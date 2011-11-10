@@ -14,7 +14,7 @@ class GetOrderTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'GetOrderResponse');
+        $this->setMockResponse($client, 'mws/GetOrderResponse');
 
         $command = $client->getCommand('get_order')
             ->setAmazonOrderId(array(

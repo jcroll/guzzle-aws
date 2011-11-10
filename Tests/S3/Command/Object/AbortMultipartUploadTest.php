@@ -24,7 +24,7 @@ class AbortMultipartUploadTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setUploadId('123'));
         
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'DefaultResponse');
+        $this->setMockResponse($client, 's3/DefaultResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/key?uploadId=123', $command->getRequest()->getUrl());

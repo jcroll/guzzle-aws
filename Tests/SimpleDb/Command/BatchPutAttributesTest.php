@@ -99,7 +99,7 @@ class BatchPutAttributesTest extends \Guzzle\Tests\GuzzleTestCase
                 'attribute_1' => 'value_1'
             )
         ));
-        $this->setMockResponse($client, 'BatchPutAttributesResponse');
+        $this->setMockResponse($client, 'sdb/BatchPutAttributesResponse');
         $client->execute($command);
 
         $request = $command->getRequest();

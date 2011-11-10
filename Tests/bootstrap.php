@@ -19,6 +19,7 @@ spl_autoload_register(function($class) {
     }
 });
 
+\Guzzle\Tests\GuzzleTestCase::setMockBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'mock');
 \Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::factory(array(
     'test.abstract.aws' => array(
         'class' => '',

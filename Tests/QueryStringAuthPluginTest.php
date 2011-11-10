@@ -50,8 +50,8 @@ class QueryStringAuthPluginTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertTrue($client->getEventManager()->hasObserver('Guzzle\\Aws\\QueryStringAuthPlugin'));
 
         $this->setMockResponse($client, array(
-            'DeleteDomainResponse',
-            'CreateDomainResponse'
+            'sdb/DeleteDomainResponse',
+            'sdb/CreateDomainResponse'
         ));
 
         $set = new CommandSet(array(

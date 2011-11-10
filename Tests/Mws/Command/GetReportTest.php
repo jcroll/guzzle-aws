@@ -22,7 +22,7 @@ class GetReportTest extends GuzzleTestCase
         $this->assertInstanceOf('Guzzle\Aws\Mws\Command\GetReport', $command);
 
         // Get mock response
-        $this->setMockResponse($client, 'GetReportResponse');
+        $this->setMockResponse($client, 'mws/GetReportResponse');
         $report = $client->execute($command);
         $this->assertInstanceOf('Guzzle\Aws\Mws\Model\CsvReport', $report);
 

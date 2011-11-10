@@ -35,12 +35,12 @@ class PutBucketContentsAclTest extends \Guzzle\Tests\GuzzleTestCase
         $client = $this->getServiceBuilder()->get('test.s3');
         
         $this->setMockResponse($client, array(
-            'ListBucketNextMarkerPrefixMarkerResponse',
-            'ListBucketResponse',
-            'PutObjectAclResponse',
-            'PutObjectAclResponse',
-            'PutObjectAclResponse',
-            'PutObjectAclResponse'
+            's3/ListBucketNextMarkerPrefixMarkerResponse',
+            's3/ListBucketResponse',
+            's3/PutObjectAclResponse',
+            's3/PutObjectAclResponse',
+            's3/PutObjectAclResponse',
+            's3/PutObjectAclResponse'
 
         ));
 

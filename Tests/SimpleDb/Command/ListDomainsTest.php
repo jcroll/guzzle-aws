@@ -23,7 +23,7 @@ class ListDomainsTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setNextToken(null));
 
         $client = $this->getServiceBuilder()->get('test.simple_db');
-        $this->setMockResponse($client, array('ListDomainsWithNextTokenResponse', 'ListDomainsResponse'));
+        $this->setMockResponse($client, array('sdb/ListDomainsWithNextTokenResponse', 'sdb/ListDomainsResponse'));
         $client->execute($command);
 
         $this->assertEquals(array(

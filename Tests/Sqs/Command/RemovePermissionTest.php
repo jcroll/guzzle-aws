@@ -23,7 +23,7 @@ class RemovePermissionTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setLabel('testLabel'));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'RemovePermissionResponse');
+        $this->setMockResponse($client, 'sqs/RemovePermissionResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

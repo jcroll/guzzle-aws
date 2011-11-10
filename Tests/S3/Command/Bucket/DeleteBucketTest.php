@@ -20,7 +20,7 @@ class DeleteBucketTest extends \Guzzle\Tests\GuzzleTestCase
         $command = new \Guzzle\Aws\S3\Command\Bucket\DeleteBucket();
         $command->setBucket('test');
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'DeleteBucketResponse');
+        $this->setMockResponse($client, 's3/DeleteBucketResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/', $command->getRequest()->getUrl());

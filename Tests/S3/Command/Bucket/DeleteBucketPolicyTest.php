@@ -23,7 +23,7 @@ class DeleteBucketPolicyTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setBucket('test'));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'DeleteBucketPolicyResponse');
+        $this->setMockResponse($client, 's3/DeleteBucketPolicyResponse');
         $client->execute($command);
 
         // Ensure that the DELETE request was sent to the policy sub resource

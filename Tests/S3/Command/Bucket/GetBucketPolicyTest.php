@@ -22,7 +22,7 @@ class GetBucketPolicyTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setBucket('test');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'GetBucketPolicyResponse');
+        $this->setMockResponse($client, 's3/GetBucketPolicyResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/?policy', $command->getRequest()->getUrl());

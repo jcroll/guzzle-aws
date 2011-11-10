@@ -22,7 +22,7 @@ class DeleteObjectTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setVersionId('123');
         
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'DeleteObjectResponse');
+        $this->setMockResponse($client, 's3/DeleteObjectResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/key?versionId=123', $command->getRequest()->getUrl());

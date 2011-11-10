@@ -26,7 +26,7 @@ class ReceiveMessageTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->addAttribute(ReceiveMessage::SENDER_ID));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'ReceiveMessageResponse');
+        $this->setMockResponse($client, 'sqs/ReceiveMessageResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

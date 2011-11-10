@@ -22,7 +22,7 @@ class PutBucketTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setRegion('us-west-1');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketResponse');
+        $this->setMockResponse($client, 's3/PutBucketResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/', $command->getRequest()->getUrl());

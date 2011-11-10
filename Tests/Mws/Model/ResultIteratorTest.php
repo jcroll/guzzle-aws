@@ -41,7 +41,7 @@ class ResultIteratorTest extends GuzzleTestCase
         $iterator = $this->getIterator();
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'GetReportListByNextTokenResponse');
+        $this->setMockResponse($client, 'mws/GetReportListByNextTokenResponse');
 
         foreach($iterator as $row) {
             $this->assertInstanceOf('\SimpleXMLElement', $row);

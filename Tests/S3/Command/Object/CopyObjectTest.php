@@ -34,7 +34,7 @@ class CopyObjectTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setCopySourceIfUnmodifiedSince('now'));
         
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'CopyObjectResponse');
+        $this->setMockResponse($client, 's3/CopyObjectResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();

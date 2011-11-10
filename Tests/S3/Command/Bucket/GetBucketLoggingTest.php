@@ -21,7 +21,7 @@ class GetBucketLoggingTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setBucket('test');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'GetBucketLoggingResponse');
+        $this->setMockResponse($client, 's3/GetBucketLoggingResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/?logging', $command->getRequest()->getUrl());
@@ -45,7 +45,7 @@ class GetBucketLoggingTest extends \Guzzle\Tests\GuzzleTestCase
         $command = new \Guzzle\Aws\S3\Command\Bucket\GetBucketLogging();
         $command->setBucket('test');
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'GetBucketLoggingEnabledResponse');
+        $this->setMockResponse($client, 's3/GetBucketLoggingEnabledResponse');
         $client->execute($command);
 
         $status = $command->getResult();

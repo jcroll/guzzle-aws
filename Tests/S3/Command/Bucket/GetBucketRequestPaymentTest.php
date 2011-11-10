@@ -20,7 +20,7 @@ class GetBucketRequestPaymentTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setBucket('test');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'GetBucketRequestPaymentResponse');
+        $this->setMockResponse($client, 's3/GetBucketRequestPaymentResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/?requestPayment', $command->getRequest()->getUrl());

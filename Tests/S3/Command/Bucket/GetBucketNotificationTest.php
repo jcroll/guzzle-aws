@@ -22,7 +22,7 @@ class GetBucketNotificationTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setBucket('test'));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'GetBucketNotificationResponse');
+        $this->setMockResponse($client, 's3/GetBucketNotificationResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/?notification', $command->getRequest()->getUrl());

@@ -56,7 +56,7 @@ class ItemSearchTest extends GuzzleTestCase
             ->setVariationPage(1)
             ->setResponseGroup('Accessories');
 
-        $this->setMockResponse($client, 'ItemSearchResponse');
+        $this->setMockResponse($client, 'pa/ItemSearchResponse');
         $command->execute();
     }
 

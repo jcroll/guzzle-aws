@@ -40,7 +40,7 @@ class ItemLookupTest extends GuzzleTestCase
         
         $this->assertInstanceOf('Guzzle\Aws\ProductAdvertising\Command\ItemLookup', $command);
         
-        $this->setMockResponse($client, 'ItemLookupResponse');
+        $this->setMockResponse($client, 'pa/ItemLookupResponse');
         $command->execute();
     }
     

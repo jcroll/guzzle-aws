@@ -25,7 +25,7 @@ class DeleteAttributesTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->addExpected('test_attr', 'abc', true));
 
         $client = $this->getServiceBuilder()->get('test.simple_db');
-        $this->setMockResponse($client, 'DeleteAttributesResponse');
+        $this->setMockResponse($client, 'sdb/DeleteAttributesResponse');
 
         $client->execute($command);
 

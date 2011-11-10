@@ -14,7 +14,7 @@ class ListOrdersByNextTokenTest extends \Guzzle\Tests\GuzzleTest
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'ListOrdersByNextTokenResponse');
+        $this->setMockResponse($client, 'mws/ListOrdersByNextTokenResponse');
 
         $command = $client->getCommand('list_orders_by_next_token')
                 ->setNextToken('ASDF');

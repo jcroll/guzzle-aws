@@ -27,7 +27,7 @@ class GetBucketObjectVersionsTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setVersionIdMarker(123));
         
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'GetBucketObjectVersionsResponse');
+        $this->setMockResponse($client, 's3/GetBucketObjectVersionsResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();

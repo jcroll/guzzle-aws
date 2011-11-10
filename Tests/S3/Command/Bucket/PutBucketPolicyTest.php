@@ -42,7 +42,7 @@ class PutBucketPolicyTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setPolicy($policy));
         
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketPolicyResponse');
+        $this->setMockResponse($client, 's3/PutBucketPolicyResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();

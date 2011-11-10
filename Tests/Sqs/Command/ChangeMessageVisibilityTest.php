@@ -24,7 +24,7 @@ class ChangeMessageVisibilityTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setVisibilityTimeout(12));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'ChangeMessageVisibilityResponse');
+        $this->setMockResponse($client, 'sqs/ChangeMessageVisibilityResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

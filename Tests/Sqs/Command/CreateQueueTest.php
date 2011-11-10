@@ -24,7 +24,7 @@ class CreateQueueTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setDefaultVisibilityTimeout(20));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'CreateQueueResponse');
+        $this->setMockResponse($client, 'sqs/CreateQueueResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

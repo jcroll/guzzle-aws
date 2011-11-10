@@ -25,7 +25,7 @@ class AddPermissionTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setLabel('Test'));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'AddPermissionResponse');
+        $this->setMockResponse($client, 'sqs/AddPermissionResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

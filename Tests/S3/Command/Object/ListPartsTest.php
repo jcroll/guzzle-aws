@@ -29,7 +29,7 @@ class ListPartsTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals(100, $command->get('limit'));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'ListPartsResponse');
+        $this->setMockResponse($client, 's3/ListPartsResponse');
         $client->execute($command);
 
         $parts = $command->getResult();
@@ -82,7 +82,7 @@ class ListPartsTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setMaxParts(2));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, array('ListPartsTruncatedResponse', 'ListPartsResponse'));
+        $this->setMockResponse($client, array('s3/ListPartsTruncatedResponse', 's3/ListPartsResponse'));
         $client->execute($command);
 
         $parts = $command->getResult();
@@ -135,7 +135,7 @@ class ListPartsTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals(3, $command->get('limit'));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, array('ListPartsTruncatedResponse', 'ListPartsResponse'));
+        $this->setMockResponse($client, array('s3/ListPartsTruncatedResponse', 's3/ListPartsResponse'));
         $client->execute($command);
         
         $parts = $command->getResult();

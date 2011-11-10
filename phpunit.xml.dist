@@ -11,13 +11,6 @@
           --  e.g. /Users/michael/projects/guzzle
           -->
         <server name="GUZZLE" value="/path/to/guzzle" />
-
-        <!--
-          -- Guzzle tries to figure out the path to mock files automatically.
-          -- Set the following value to "1" if your Guzzle service contains
-          -- multiple clients under one service namespace (e.g. Aws\S3, Aws\Sqs)
-          -->
-        <server name="GUZZLE_SERVICE_MULTI" value="1" />
     </php>
 
     <testsuites>

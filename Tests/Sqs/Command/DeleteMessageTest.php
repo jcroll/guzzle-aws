@@ -23,7 +23,7 @@ class DeleteMessageTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setReceiptHandle('MbZj6wDWli%2BJvwwJaBV%2B3dcjk2YW2vA3%2BSTFFljTM8tJJg6HRG6PYSasuWXPJB%2BCwLj1FjgXUv1uSj1gUPAWV66FU/WeR4mq2OKpEGYWbnLmpRCJVAyeMjeU5ZBdtcQ%2BQEauMZc8ZRv37sIW2iJKq3M9MFx1YvV11A2x/KSbkJ0='));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'DeleteMessageResponse');
+        $this->setMockResponse($client, 'sqs/DeleteMessageResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

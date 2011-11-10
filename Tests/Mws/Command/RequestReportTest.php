@@ -15,7 +15,7 @@ class RequestReportTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'RequestReportResponse');
+        $this->setMockResponse($client, 'mws/RequestReportResponse');
         
         $command = $client->getCommand('request_report')
             ->setReportType(Type\ReportType::MERCHANT_LISTINGS_REPORT)

@@ -31,7 +31,7 @@ class HeadObjectTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setVersionId('123');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'HeadObjectResponse');
+        $this->setMockResponse($client, 's3/HeadObjectResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/key?versionId=123', $command->getRequest()->getUrl());

@@ -21,19 +21,19 @@ class BucketIteratorTest extends \Guzzle\Tests\GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.s3');
 
-        $xml = new \SimpleXMLElement($this->getMockResponse($client, 'ListBucketResponse')->getBody(true));
+        $xml = new \SimpleXMLElement($this->getMockResponse('s3/ListBucketResponse')->getBody(true));
         $iterator = BucketIterator::factory($client, $xml);
         $this->assertNull($iterator->decideMarker());
 
-        $xml = new \SimpleXMLElement($this->getMockResponse($client, 'ListBucketTruncatedResponse')->getBody(true));
+        $xml = new \SimpleXMLElement($this->getMockResponse('s3/ListBucketTruncatedResponse')->getBody(true));
         $iterator = BucketIterator::factory($client, $xml);
         $this->assertEquals('Neo', $iterator->decideMarker());
 
-        $xml = new \SimpleXMLElement($this->getMockResponse($client, 'ListBucketNextMarkerPrefixMarkerResponse')->getBody(true));
+        $xml = new \SimpleXMLElement($this->getMockResponse('s3/ListBucketNextMarkerPrefixMarkerResponse')->getBody(true));
         $iterator = BucketIterator::factory($client, $xml);
         $this->assertEquals('Moe', $iterator->decideMarker());
 
-        $xml = new \SimpleXMLElement($this->getMockResponse($client, 'ListBucketCommonPrefixUseCommonResponse')->getBody(true));
+        $xml = new \SimpleXMLElement($this->getMockResponse('s3/ListBucketCommonPrefixUseCommonResponse')->getBody(true));
         $iterator = BucketIterator::factory($client, $xml);
         $this->assertEquals('photos/2006/January/', $iterator->decideMarker());
     }
@@ -46,8 +46,8 @@ class BucketIteratorTest extends \Guzzle\Tests\GuzzleTestCase
     public function testSendsSubequentCalls()
     {
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'ListBucketResponse');
-        $xml = new \SimpleXMLElement($this->getMockResponse($client, 'ListBucketNextMarkerPrefixMarkerResponse')->getBody(true));
+        $this->setMockResponse($client, 's3/ListBucketResponse');
+        $xml = new \SimpleXMLElement($this->getMockResponse('s3/ListBucketNextMarkerPrefixMarkerResponse')->getBody(true));
         $iterator = BucketIterator::factory($client, $xml);
         $results = $iterator->toArray();
         

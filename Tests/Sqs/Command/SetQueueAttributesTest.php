@@ -24,7 +24,7 @@ class SetQueueAttributesTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->addAttribute(SetQueueAttributes::MAXIMUM_MESSAGE_SIZE, 8192));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'SetQueueAttributesResponse');
+        $this->setMockResponse($client, 'sqs/SetQueueAttributesResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

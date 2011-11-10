@@ -15,7 +15,7 @@ class CancelFeedSubmissionsTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'CancelFeedSubmissionsResponse');
+        $this->setMockResponse($client, 'mws/CancelFeedSubmissionsResponse');
 
         $command = $client->getCommand('cancel_feed_submissions')
             ->setFeedSubmissionIdList(array(

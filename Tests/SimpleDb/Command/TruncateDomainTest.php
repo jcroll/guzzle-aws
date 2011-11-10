@@ -20,8 +20,8 @@ class TruncateDomainTest extends \Guzzle\Tests\GuzzleTestCase
         $client = $this->getServiceBuilder()->get('test.simple_db', true);
         $client->setBaseUrl($this->getServer()->getUrl());
         $this->setMockResponse($client, array(
-            'DeleteDomainResponse',
-            'CreateDomainResponse'
+            'sdb/DeleteDomainResponse',
+            'sdb/CreateDomainResponse'
         ));
 
         $command = new \Guzzle\Aws\SimpleDb\Command\TruncateDomain();

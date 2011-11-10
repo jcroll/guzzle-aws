@@ -25,7 +25,7 @@ class PutBucketVersioningTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setMfaHeader('abc 123'));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketVersioningResponse');
+        $this->setMockResponse($client, 's3/PutBucketVersioningResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();
@@ -45,7 +45,7 @@ class PutBucketVersioningTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setStatus(false));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketVersioningResponse');
+        $this->setMockResponse($client, 's3/PutBucketVersioningResponse');
         $client->execute($command);
 
         $this->assertEquals('<VersioningConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Status>Suspended</Status></VersioningConfiguration>', (string)$command->getRequest()->getBody());

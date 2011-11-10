@@ -23,7 +23,7 @@ class SelectIteratorTest extends \Guzzle\Tests\GuzzleTestCase
         $client = $this->getServiceBuilder()->get('test.simple_db');
         $command = new Select();
         $command->setSelectExpression('select * from mydomain where Title = \'The Right Stuff\'');
-        $this->setMockResponse($client, array('SelectResponseWithNextToken', 'SelectResponse'));
+        $this->setMockResponse($client, array('sdb/SelectResponseWithNextToken', 'sdb/SelectResponse'));
         $client->execute($command);
         $this->assertInstanceOf('Guzzle\Aws\SimpleDb\Model\SelectIterator', $command->getResult());
 
@@ -78,7 +78,7 @@ class SelectIteratorTest extends \Guzzle\Tests\GuzzleTestCase
         $command = new Select();
         $command->setSelectExpression('select * from mydomain where Title = \'The Right Stuff\'');
         $command->setLimit(2);
-        $this->setMockResponse($client, array('SelectResponseWithNextToken', 'SelectResponse'));
+        $this->setMockResponse($client, array('sdb/SelectResponseWithNextToken', 'sdb/SelectResponse'));
         $client->execute($command);
         $this->assertInstanceOf('Guzzle\Aws\SimpleDb\Model\SelectIterator', $command->getResult());
 

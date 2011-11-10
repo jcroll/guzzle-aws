@@ -15,7 +15,7 @@ class GetFeedSubmissionListByNextTokenTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'GetFeedSubmissionListByNextTokenResponse');
+        $this->setMockResponse($client, 'mws/GetFeedSubmissionListByNextTokenResponse');
         $command = $client->getCommand('get_feed_submission_list_by_next_token')
             ->setNextToken('asdf');
 

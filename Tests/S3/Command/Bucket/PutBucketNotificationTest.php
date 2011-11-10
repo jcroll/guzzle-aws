@@ -34,7 +34,7 @@ class PutBucketNotificationTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setNotification($xml));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketNotificationResponse');
+        $this->setMockResponse($client, 's3/PutBucketNotificationResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();
@@ -57,7 +57,7 @@ class PutBucketNotificationTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setNotification($notification));
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'PutBucketNotificationOffResponse');
+        $this->setMockResponse($client, 's3/PutBucketNotificationOffResponse');
         $client->execute($command);
 
         $request = (string)$command->getRequest();

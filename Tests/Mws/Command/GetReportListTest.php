@@ -19,7 +19,7 @@ class GetReportListTest extends GuzzleTestCase
         // Get client
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'GetReportListResponse');
+        $this->setMockResponse($client, 'mws/GetReportListResponse');
 
         // Test command
         $command = $client->getCommand('get_report_list')

@@ -23,7 +23,7 @@ class SendMessageTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setMessage('This is a test message'));
 
         $client = $this->getServiceBuilder()->get('test.sqs');
-        $this->setMockResponse($client, 'SendMessageResponse');
+        $this->setMockResponse($client, 'sqs/SendMessageResponse');
         $client->execute($command);
 
         $request = (string) $command->getRequest();

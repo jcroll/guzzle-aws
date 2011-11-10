@@ -27,7 +27,7 @@ class SelectTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($command, $command->setSelectExpression('select * from mydomain where Title = \'The Right Stuff\''));
         $this->assertEquals('select * from mydomain where Title = \'The Right Stuff\'', $command->getSelectExpression());
 
-        $this->setMockResponse($client, array('SelectResponseWithNextToken'));
+        $this->setMockResponse($client, 'sdb/SelectResponseWithNextToken');
         $client->execute($command);
 
         $this->assertContains(

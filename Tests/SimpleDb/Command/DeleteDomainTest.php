@@ -21,7 +21,7 @@ class DeleteDomainTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setDomain('test');
 
         $client = $this->getServiceBuilder()->get('test.simple_db');
-        $this->setMockResponse($client, 'DeleteDomainResponse');
+        $this->setMockResponse($client, 'sdb/DeleteDomainResponse');
         $client->execute($command);
 
         $this->assertContains('http://sdb.amazonaws.com/?Action=DeleteDomain&DomainName=test&Timestamp=', $command->getRequest()->getUrl());

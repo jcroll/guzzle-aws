@@ -14,7 +14,7 @@ class GetReportScheduleListByNextTokenTest extends GuzzleTestCase
     {
         $client = $this->getServiceBuilder()->get('test.mws');
 
-        $this->setMockResponse($client, 'GetReportScheduleListByNextTokenResponse');
+        $this->setMockResponse($client, 'mws/GetReportScheduleListByNextTokenResponse');
 
         $command = $client->getCommand('get_report_schedule_list_by_next_token')
             ->setNextToken('asdf');

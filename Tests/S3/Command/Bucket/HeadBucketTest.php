@@ -20,7 +20,7 @@ class HeadBucketTest extends \Guzzle\Tests\GuzzleTestCase
         $command->setBucket('test');
 
         $client = $this->getServiceBuilder()->get('test.s3');
-        $this->setMockResponse($client, 'DefaultResponse');
+        $this->setMockResponse($client, 's3/DefaultResponse');
         $client->execute($command);
 
         $this->assertEquals('http://test.s3.amazonaws.com/?max-keys=0', $command->getRequest()->getUrl());
