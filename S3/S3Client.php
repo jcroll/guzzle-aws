@@ -195,9 +195,9 @@ class S3Client extends AbstractClient
     /**
      * {@inheritdoc}
      */
-    public function createRequest($method = RequestInterface::GET, $uri = null, $inject = null)
+    public function createRequest($method = RequestInterface::GET, $uri = null, $headers = null, $body = null)
     {
-        $request = parent::createRequest($method, $uri, $inject);
+        $request = parent::createRequest($method, $uri, $headers, $body);
         $request->setHeader('Date', Guzzle::getHttpDate('now'))
                 ->setHeader('Host', $request->getHost());
 
