@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  -- You must ensure that the values in the php sections are correct before
-  -- attempting to run the tests.
+  You must ensure that the values in the php sections are correct before
+  attempting to run the tests.
   -->
 <phpunit bootstrap="./Tests/bootstrap.php" colors="true">
 
     <php>
         <!--
-          --  Change the following value to the path of your Guzzle installation
-          --  e.g. /Users/michael/projects/guzzle
+          Change the following value to the path of your Guzzle installation
+          e.g. /Users/michael/projects/guzzle
           -->
         <server name="GUZZLE" value="/path/to/guzzle" />
     </php>
