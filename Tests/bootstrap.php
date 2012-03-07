@@ -28,6 +28,10 @@ spl_autoload_register(function($class) {
             'secret_key' => 'abcd'
         )
     ),
+		'test.ec2' => array(
+				'extends' => 'test.abstract.aws',
+				'class' => 'Guzzle.Aws.Ec2.Ec2Client'
+		),
     'test.s3' => array(
         'extends' => 'test.abstract.aws',
         'class'   => 'Guzzle.Aws.S3.S3Client',

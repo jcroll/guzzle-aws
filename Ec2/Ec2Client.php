@@ -15,7 +15,7 @@ use Guzzle\Aws\Signature\SignatureV2;
 /**
  * Client for interacting with Amazon Ec2
  * 
- * @author Ryan J. Geyer <me@ryangeyer.com> *
+ * @author Ryan J. Geyer <me@ryangeyer.com>
  */
 class Ec2Client extends AbstractClient {
 	const REGION_US_EAST_1 			= 'ec2.us-east-1.amazonaws.com'; // Endpoint located in the US East (Northern Virginia) Region

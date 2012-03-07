@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: text/xml;charset=UTF-8
+Transfer-Encoding: chunked
+Content-Encoding: gzip
+Vary: Accept-Encoding
+Date: Wed, 07 Mar 2012 00:23:16 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<RevokeSecurityGroupIngressResponse xmlns="http://ec2.amazonaws.com/doc/2011-12-15/">
+    <requestId>090d1f48-0851-4589-908b-eec7171209cd</requestId>
+    <return>true</return>
+</RevokeSecurityGroupIngressResponse>
