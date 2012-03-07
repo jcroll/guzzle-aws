@@ -115,6 +115,20 @@ class SignatureV2Test extends \Guzzle\Tests\GuzzleTestCase
     {
         $this->assertEquals("GET\ntest.amazonaws.com\n/\n", $this->signature->calculateStringToSign(array(), $this->_options));
     }
+    
+    /**
+     * @covers Guzzle\Aws\Signature\SignatureV2::calculateStringToSign
+     */
+    public function testCalculateStringToSignRequestWithValuesEquatingToFalse()
+    {
+    	$params = array(
+    			'a' => 0,
+    			'b' => '0',
+    			'c' => false
+    	);
+    	
+    	$this->assertEquals("GET\ntest.amazonaws.com\n/\na=0&b=0&c=false", $this->signature->calculateStringToSign($params, $this->_options));
+    }
 
     /**
      * @covers Guzzle\Aws\Signature\SignatureV2
