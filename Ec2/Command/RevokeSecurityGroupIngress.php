@@ -13,8 +13,9 @@ use Guzzle\Service\Command\AbstractCommand;
  *
  * @author Ryan J. Geyer <me@ryangeyer.com>
  *
- * @guzzle group_id required="true" type="string" doc="The AWS id of the Security Group"
- * @guzzle rules required="true" type="array" doc="An associative array. For a CIDR based rule the required keys are (protocol, from_port, to_port, cidr_ips).  For a Group based rule required keys are either (user_id, group_id) or (group_id, protocol, from_port, to_port)
+ * @guzzle rules required="true" type="array" doc="An associative array. For a CIDR based rule the required keys are (protocol, from_port, to_port, cidr_ips).  For a Group based rule required keys are either (user_id, group_id) or (group_id, protocol, from_port, to_port)"
+ * @guzzle group_id type="string" doc="The AWS id of the Security Group"
+ * @guzzle group_name required="false" type="string" doc="The AWS name of the Security Group" 
  */
 class RevokeSecurityGroupIngress extends AbstractCommand {
 	
@@ -22,7 +23,11 @@ class RevokeSecurityGroupIngress extends AbstractCommand {
 		$this->request = $this->client->createRequest('GET');
 		$this->request->getQuery()->set("Action", "RevokeSecurityGroupIngress");
 		
-		$this->request->getQuery()->set("GroupId", $this->get('group_id'));
+		if($this->get('group_id')) {
+			$this->request->getQuery()->set("GroupId", $this->get('group_id'));
+		} else if ($this->get('group_name')) {
+			$this->request->getQuery()->set("GroupName", $this->get('group_name'));			
+		}
 		
 		foreach($this->get('rules') as $idx => $rule) {
 			$ruleIdx = $idx + 1;
@@ -40,6 +45,9 @@ class RevokeSecurityGroupIngress extends AbstractCommand {
 						break;
 					case 'user_id':
 						$this->request->getQuery()->set("IpPermissions.$ruleIdx.Groups.1.UserId", $rule[$rule_key]);
+						break;
+					case 'group_name':
+						$this->request->getQuery()->set("IpPermissions.$ruleIdx.Groups.1.GroupName", $rule[$rule_key]);
 						break;
 					case 'group_id':
 						$this->request->getQuery()->set("IpPermissions.$ruleIdx.Groups.1.GroupId", $rule[$rule_key]);
