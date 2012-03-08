@@ -1,0 +1,50 @@
+HTTP/1.1 200 OK
+Content-Type: text/xml;charset=UTF-8
+Transfer-Encoding: chunked
+Content-Encoding: gzip
+Vary: Accept-Encoding
+Date: Thu, 08 Mar 2012 01:37:06 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2011-12-15/">
+    <requestId>7fbd2dd1-c961-430b-926c-01bf51c27a21</requestId>
+    <keySet>
+        <item>
+            <keyName>Key1</keyName>
+            <keyFingerprint>c7:e5:6c:c3:24:f3:b2:1c:a6:39:b4:d6:c5:ab:6a:e7:3f:01:e8:8f</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key2</keyName>
+            <keyFingerprint>26:7d:14:7d:e9:d0:c3:1c:aa:26:f5:c2:d1:ab:65:fc:8f:cd:9d:47</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key3</keyName>
+            <keyFingerprint>9a:60:3a:90:42:8e:c6:85:44:d6:0c:ab:9e:9b:1c:2d:64:b9:7d:73</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key4</keyName>
+            <keyFingerprint>b3:c3:c8:28:5d:7d:eb:ee:ae:32:24:d8:7d:66:78:69:01:f4:cb:d0</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key5</keyName>
+            <keyFingerprint>b0:73:8c:ee:6f:8a:60:ec:b0:db:70:68:8b:ba:02:ea:9a:4a:c1:8b</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key6</keyName>
+            <keyFingerprint>c9:98:a1:78:aa:68:78:0b:43:be:38:90:94:c4:23:54:08:37:92:be</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key7</keyName>
+            <keyFingerprint>88:df:be:17:29:57:63:2b:10:1c:37:5f:51:24:e6:7c:50:c7:a0:37</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key8</keyName>
+            <keyFingerprint>8b:39:3d:8b:0f:9f:44:b5:9c:6f:0c:ee:23:24:98:48:8c:10:60:bb</keyFingerprint>
+        </item>
+        <item>
+            <keyName>Key9</keyName>
+            <keyFingerprint>82:ff:45:5e:76:65:7a:e1:f7:08:bf:f8:83:3d:53:50:d4:62:0a:00</keyFingerprint>
+        </item>
+    </keySet>
+</DescribeKeyPairsResponse>
