@@ -15,7 +15,7 @@ use Guzzle\Service\Command\AbstractCommand;
  *
  * @guzzle rules required="true" type="array" doc="An associative array. For a CIDR based rule the required keys are (protocol, from_port, to_port, cidr_ips).  For a Group based rule required keys are either (user_id, group_id) or (group_id, protocol, from_port, to_port)"
  * @guzzle group_id type="string" doc="The AWS id of the Security Group"
- * @guzzle group_name required="false" type="string" doc="The AWS name of the Security Group" 
+ * @guzzle group_name type="string" doc="The AWS name of the Security Group" 
  */
 class RevokeSecurityGroupIngress extends AbstractCommand {
 	
