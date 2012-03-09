@@ -15,6 +15,9 @@ use Guzzle\Aws\Ec2\Ec2Client;
  */
 class DeleteSecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 
+	/**
+	 * @covers Guzzle\Aws\Ec2\Command\DeleteSecurityGroup
+	 */
 	public function testCanDeleteSecurityGroup() {
 		$command = new DeleteSecurityGroup();		
 		$command->set('group_name', 'test');
