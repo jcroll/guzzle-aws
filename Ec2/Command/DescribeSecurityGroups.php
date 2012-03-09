@@ -9,7 +9,7 @@ namespace Guzzle\Aws\Ec2\Command;
 use Guzzle\Service\Command\AbstractCommand;
 
 /**
- * Lists Ssh Key Pairs
+ * Lists Security Groups
  *
  * @author Ryan J. Geyer <me@ryangeyer.com>
  *
