@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: text/xml;charset=UTF-8
+Transfer-Encoding: chunked
+Content-Encoding: gzip
+Vary: Accept-Encoding
+Date: Fri, 09 Mar 2012 00:19:30 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<DeleteKeyPairResponse xmlns="http://ec2.amazonaws.com/doc/2011-12-15/">
+  <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> 
+  <return>true</return>
+</DeleteKeyPairResponse>
