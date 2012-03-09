@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: text/xml;charset=UTF-8
+Transfer-Encoding: chunked
+Content-Encoding: gzip
+Vary: Accept-Encoding
+Date: Fri, 09 Mar 2012 00:19:30 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<DeleteSecurityGroupResponse xmlns="http://ec2.amazonaws.com/doc/2011-12-15/">
+    <requestId>c57e7bf7-e746-4f84-9ec4-9c4b4e854bdb</requestId>
+    <return>true</return>
+</DeleteSecurityGroupResponse>
