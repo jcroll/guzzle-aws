@@ -64,6 +64,7 @@ class SignatureV2 extends AbstractSignature
                 if ($parameterString) {
                     $parameterString .= '&';
                 }
+                if(is_bool($v)) { $v = $v ? "true" : "false"; }
                 $parameterString .= rawurlencode($k) . '=' . rawurlencode($v);
             }
         }
