@@ -60,7 +60,7 @@ class SignatureV2 extends AbstractSignature
         uksort($request, $options['sort_method']);
 
         foreach ($request as $k => $v) {
-            if (isset($k) && isset($v) && !in_array($k, $options['ignore'])) {
+            if (isset($k) && isset($v) && (is_bool($v) || strval($v) != '') && !in_array($k, $options['ignore'])) {
                 if ($parameterString) {
                     $parameterString .= '&';
                 }
