@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\Ec2;
 
-use Guzzle\Common\Inspector;
+use Guzzle\Service\Inspector;
 use Guzzle\Http\Plugin\ExponentialBackoffPlugin;
 use Guzzle\Aws\AbstractClient;
 use Guzzle\Aws\QueryStringAuthPlugin;
@@ -26,7 +26,7 @@ class Ec2Client extends AbstractClient {
 	const REGION_AP_NORTHEAST_1 = 'ec2.ap-northeast-1.amazonaws.com'; // Endpoint located in the Asia Pacific (Tokyo) Region
 	const REGION_SA_EAST_1 			= 'ec2.sa-east-1.amazonaws.com'; // Endpoint located in the South America (Sao Paulo) Region
 	
-	public static function factory($config) {
+	public static function factory($config = array()) {
 		$config = Inspector::prepareConfig($config, array(
 			'base_url' => '{{scheme}}://{{region}}',
 			'version' => '2011-12-15',
@@ -48,12 +48,12 @@ class Ec2Client extends AbstractClient {
 		);
 		$client->setConfig($config);
 		
-		$client->getEventManager()->attach(
+		$client->getEventDispatcher()->addSubscriber(
 			new QueryStringAuthPlugin($signature, $config->get('version')),
 			-9999
 		);
 		
-		$client->getEventManager()->attach(new ExponentialBackoffPlugin());
+		$client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
 		
 		return $client;
 	}

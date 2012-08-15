@@ -7,7 +7,7 @@
 
 namespace Guzzle\Aws\Mws\Model;
 
-use Guzzle\Service\ResourceIterator;
+use Guzzle\Service\Resource\ResourceIterator;
 
 /**
  * Iterator for commands with iterable results
@@ -29,10 +29,9 @@ class ResultIterator extends ResourceIterator
         // Throttle requests by waiting 1 second
         sleep(1);
 
-        $command = $this->client->getCommand($this->data['next_command'])
-            ->setNextToken($this->getNextToken());
-        $response = $this->client->execute($command);
-        $this->processResult($response);
+      $command = $this->command->setNextToken($this->getNextToken());
+      $response = $this->command->execute();
+      $this->processResult($response);
     }
 
     /**

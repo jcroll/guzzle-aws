@@ -90,11 +90,15 @@ class S3Signature extends SignatureV1
 
         if (!empty($headers)) {
             $headers = array_change_key_case($headers, CASE_LOWER);
-            if ($headers['host']) {
+            if (array_key_exists('host', $headers) && !empty($headers['host'])) {
+              $hostheader = $headers['host'];
+              if(is_array($hostheader)) {
+                $hostheader = $headers['host'][0];
+              }
                 $matches = array();
-                $usesS3 = preg_match('/^([a-zA-Z0-9_\-\.]+)\.(?:' . implode('|', array_map('preg_quote', S3Client::getEndpoints())) . ').*$/', $headers['host'], $matches);
+                $usesS3 = preg_match('/^([a-zA-Z0-9_\-\.]+)\.(?:' . implode('|', array_map('preg_quote', S3Client::getEndpoints())) . ').*$/', $hostheader, $matches);
                 // If this is a CNAME, then just use the Host header
-                $host = $usesS3 ? $matches[1] : str_replace(S3Client::getEndpoints(), '', $headers['host']);
+                $host = $usesS3 ? $matches[1] : str_replace(S3Client::getEndpoints(), '', $hostheader);
 
                 if ($host) {
                     if (preg_match('/^[A-Za-z0-9._\-]+$/', $host)) {

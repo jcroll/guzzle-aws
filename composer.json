@@ -4,7 +4,6 @@
     "description": "Guzzle PHP client for AWS",
     "keywords": ["framework", "aws", "sqs", "simpledb", "s3", "amazon", "mws"],
     "homepage": "http://www.guzzlephp.org/",
-    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -18,9 +17,9 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "guzzle/guzzle": "1.0.0"
+        "guzzle/guzzle": ">=2.0.0"
     },
     "autoload": {
-        "psr-0": { "Guzzle/Aws": "/" }
+        "psr-0": { "Guzzle\\Aws": "/" }
     }
 }

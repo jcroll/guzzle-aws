@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\Tests\S3\Command\Object;
 
-use Guzzle\Guzzle;
+
 
 /**
  * @author Michael Dowling <michael@guzzlephp.org>

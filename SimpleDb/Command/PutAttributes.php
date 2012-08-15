@@ -30,7 +30,10 @@ class PutAttributes extends AbstractAttributeCommand
     protected function build()
     {
         parent::build();
-        foreach ($this->getAll('/Expected\.[0-9]+.*/', Collection::MATCH_REGEX) as $key => $value) {
+      $params = $this->filter(function ($key, $value) {
+        return $key != 'headers' && preg_match('/Expected\.[0-9]+.*/', $key);
+      });
+        foreach ($params as $key => $value) {
             $this->request->getQuery()->set($key, $value);
         }
     }
@@ -47,7 +50,10 @@ class PutAttributes extends AbstractAttributeCommand
      */
     public function addAttribute($name, $value, $replace = false)
     {
-        $count = (int) count($this->getAll('/^Attribute(Name)*\.[0-9]+\.Name$/', Collection::MATCH_REGEX));
+      $params = $this->filter(function ($key, $value) {
+      return $key != 'headers' && preg_match('/^Attribute(Name)*\.[0-9]+\.Name$/', $key);
+    });
+        $count = (int) count($params);
         $this->set("Attribute.{$count}.Name", (string) $name);
         $this->set("Attribute.{$count}.Value", (string) $value);
         $this->set("Attribute.{$count}.Replace", ($replace) ? 'true' : 'false');
@@ -66,7 +72,10 @@ class PutAttributes extends AbstractAttributeCommand
      */
     public function addExpected($name, $value, $exists = false)
     {
-        $count = (int) count($this->getAll('/^Expected\.[0-9]+\.Name$/', Collection::MATCH_REGEX));
+      $params = $this->filter(function ($key, $value) {
+      return $key != 'headers' && preg_match('/^Expected\.[0-9]+\.Name$/', $key);
+    });
+        $count = (int) count($params);
         $this->set("Expected.{$count}.Name", (string) $name);
         $this->set("Expected.{$count}.Value", (string) $value);
         $this->set("Expected.{$count}.Exists", ($exists) ? 'true' : 'false');

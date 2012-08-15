@@ -11,7 +11,7 @@ use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Common\Collection;
 use Guzzle\Http\Message\Request;
 use Guzzle\Aws\S3\Command\AbstractS3BucketCommand;
-use Guzzle\Guzzle;
+use Guzzle\Http\Utils;
 
 /**
  * Abstract class to simplify HEAD object and GET object commands
@@ -54,7 +54,7 @@ abstract class AbstractRequestObject extends AbstractS3BucketCommand
      */
     public function setIfModifiedSince($since)
     {
-        return $this->set('if_modified_since', Guzzle::getHttpDate($since));
+        return $this->set('if_modified_since', Utils::getHttpDate($since));
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class AbstractRequestObject extends AbstractS3BucketCommand
      */
     public function setIfUnmodifiedSince($since)
     {
-        return $this->set('if_unmodified_since', Guzzle::getHttpDate($since));
+        return $this->set('if_unmodified_since', Utils::getHttpDate($since));
     }
 
     /**

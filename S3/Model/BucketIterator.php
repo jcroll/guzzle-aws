@@ -6,7 +6,8 @@
 
 namespace Guzzle\Aws\S3\Model;
 
-use Guzzle\Service\ResourceIterator;
+use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Service\Resource\ResourceIterator;
 use Guzzle\Aws\S3\S3Client;
 use Guzzle\Aws\S3\Command\Bucket\ListBucket;
 use Guzzle\Aws\S3\S3Exception;
@@ -27,16 +28,16 @@ class BucketIterator extends ResourceIterator
      * Factory method to create a new BucketIterator using the response of a
      * listBucket request.
      *
-     * @param S3Client $client The client responsible for sending subsquent requests
+     * @param AbstractCommand $command The command object for the first request, subsequent requests will be made on the encapsulated client
      * @param \SimpleXMLElement $bucketResult The initial XML response from a
      *      list bucket command
      * @param int $limit (optional) Total number of results to retrieve
      *
      * @return BucketIterator
      */
-    public static function factory(S3Client $client, \SimpleXMLElement $bucketResult, $limit = -1)
+    public static function factory(AbstractCommand $command, \SimpleXMLElement $bucketResult, $limit = -1)
     {
-        $iterator = new self($client, array(
+        $iterator = new self($command, array(
             'limit' => $limit,
             'page_size' => min(1000, $limit)
         ));
@@ -62,7 +63,7 @@ class BucketIterator extends ResourceIterator
             ->setMaxKeys($this->calculatePageSize())
             ->setDelimiter($this->data['delimiter'])
             ->setXmlResponseOnly(true)
-            ->setClient($this->client);
+            ->setClient($this->command->getClient());
 
         $command->execute();
         $this->processListBucket($command->getResult());

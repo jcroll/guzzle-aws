@@ -10,12 +10,20 @@
           Change the following value to the path of your Guzzle installation
           e.g. /Users/michael/projects/guzzle
           -->
-        <server name="GUZZLE" value="/path/to/guzzle" />
+        <server name="GUZZLE" value="/vendor/guzzle" />
     </php>
 
     <testsuites>
+      <!-- This is pared down to just the libs which have been successfully migrated to
+       guzzle 2.0 -->
         <testsuite name="guzzle-service">
-            <directory suffix="Test.php">./Tests</directory>
+            <file>./Tests/AbstractClientTest.php</file>
+            <file>./Tests/QueryStringAuthPluginTest.php</file>
+            <directory suffix="Test.php">./Tests/Ec2</directory>
+            <directory suffix="Test.php">./Tests/Mws</directory>
+            <directory suffix="Test.php">./Tests/ProductAdvertising</directory>
+            <directory suffix="Test.php">./Tests/Signature</directory>
+            <directory suffix="Test.php">./Tests/Sqs</directory>
         </testsuite>
     </testsuites>
 

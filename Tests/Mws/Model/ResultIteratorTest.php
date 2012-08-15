@@ -24,7 +24,10 @@ class ResultIteratorTest extends GuzzleTestCase
             $ele->addChild('Result');
             $ele->Result->addChild('Foo', 'Bar');
 
-            $this->iterator = new ResultIterator($client, array(
+          $command = new \Guzzle\Aws\Mws\Command\GetFeedSubmissionListByNextToken;
+          $command->setClient($client);
+
+            $this->iterator = new ResultIterator($command, array(
                 'next_command'  => 'get_report_list_by_next_token',
                 'next_token'    => 'asdf',
                 'resources'     => array($ele),

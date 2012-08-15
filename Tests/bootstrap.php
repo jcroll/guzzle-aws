@@ -1,15 +1,6 @@
 <?php
 
-require_once $_SERVER['GUZZLE'] . '/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-
-$loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Guzzle' => $_SERVER['GUZZLE'] . '/src',
-    'Guzzle\\Tests' => $_SERVER['GUZZLE'] . '/tests'
-));
-$loader->register();
+require_once 'vendor/autoload.php';
 
 spl_autoload_register(function($class) {
     if (0 === strpos($class, 'Guzzle\\Aws\\')) {
@@ -20,7 +11,7 @@ spl_autoload_register(function($class) {
 });
 
 \Guzzle\Tests\GuzzleTestCase::setMockBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'mock');
-\Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::factory(array(
+\Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\Builder\ServiceBuilder::factory(array(
     'test.abstract.aws' => array(
         'class' => '',
         'params' => array(

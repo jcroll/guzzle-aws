@@ -5,7 +5,7 @@ namespace Guzzle\Aws\ProductAdvertising;
 use Guzzle\Aws\AbstractClient;
 use Guzzle\Aws\QueryStringAuthPlugin;
 use Guzzle\Aws\Signature\SignatureV2;
-use Guzzle\Common\Inspector;
+use Guzzle\Service\Inspector;
 use Guzzle\Common\Inflector;
 
 /**
@@ -28,7 +28,7 @@ class ProductAdvertisingClient extends AbstractClient
      * 
      * @return ProductAdvertisingClient
      */
-    public static function factory($config)
+    public static function factory($config = array())
     {
         $defaults = array(
             'base_url' => 'http://webservices.amazon.com/onca/xml?Service=AWSECommerceService',
@@ -48,7 +48,7 @@ class ProductAdvertisingClient extends AbstractClient
         $client->setConfig($config);
 
         // Sign the request last
-        $client->getEventManager()->attach(
+        $client->getEventDispatcher()->addSubscriber(
             new QueryStringAuthPlugin($signature, $config->get('version')), -9999
         );
 

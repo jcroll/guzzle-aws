@@ -7,7 +7,7 @@
 namespace Guzzle\Aws\Tests\S3\Command\Object;
 
 use Guzzle\Http\Message\Request;
-use Guzzle\Guzzle;
+use Guzzle\Http\Utils;
 
 /**
  * @author Michael Dowling <michael@guzzlephp.org>
@@ -54,9 +54,9 @@ class CopyObjectTest extends \Guzzle\Tests\GuzzleTestCase
             'x-amz-metadata-directive' => 'COPY',
             'x-amz-copy-source-if-match' => 'match_etag',
             'x-amz-copy-source-if-none-match' => 'none_match_etag',
-            'x-amz-copy-source-if-modified-since' => Guzzle::getHttpDate('now'),
-            'x-amz-copy-source-if-unmodified-since' => Guzzle::getHttpDate('now'),
-            'User-Agent' => Guzzle::getDefaultUserAgent()
+            'x-amz-copy-source-if-modified-since' => Utils::getHttpDate('now'),
+            'x-amz-copy-source-if-unmodified-since' => Utils::getHttpDate('now'),
+            'User-Agent' => Utils::getDefaultUserAgent()
         ), $command->getRequestHeaders()->getAll()));
     }
 

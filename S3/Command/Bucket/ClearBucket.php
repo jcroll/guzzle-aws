@@ -8,7 +8,7 @@ namespace Guzzle\Aws\S3\Command\Bucket;
 
 use Guzzle\Aws\S3\S3Client;
 use Guzzle\Service\Command\CommandSet;
-use Guzzle\Service\ResourceIteratorApplyBatched;
+use Guzzle\Service\Resource\ResourceIteratorApplyBatched;
 use Guzzle\Aws\S3\Command\Object\DeleteObject;
 
 /**

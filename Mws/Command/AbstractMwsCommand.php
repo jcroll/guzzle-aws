@@ -9,10 +9,9 @@ namespace Guzzle\Aws\Mws\Command;
 
 use Guzzle\Service\Command\AbstractCommand;
 use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Common\Inflector;
+use Guzzle\Common\Inflection\Inflector;
 use Guzzle\Aws\Mws\Model\CsvReport;
 use Guzzle\Aws\Mws\Model\ResultIterator;
-use Guzzle\Common\XmlElement;
 
 /**
  * MWS command base class
@@ -104,7 +103,7 @@ class AbstractMwsCommand extends AbstractCommand
         if ($this->result instanceof \SimpleXMLElement) {
 
             // Get result object from XML response
-            $this->result = new XmlElement($this->result->asXML());
+            //$this->result = new XmlElement($this->result->asXML());
 
             // @codeCoverageIgnoreStart
             if (empty($this->resultNode)) {
@@ -132,7 +131,7 @@ class AbstractMwsCommand extends AbstractCommand
                     }
                 }
 
-                $this->result = new ResultIterator($this->getClient(), array(
+                $this->result = new ResultIterator($this, array(
                         'next_token' => $nextToken,
                         'next_command' => $nextCommand,
                         'resources' => $records,

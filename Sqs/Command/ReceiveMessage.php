@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\Sqs\Command;
 
-use Guzzle\Common\Inflector;
+use Guzzle\Common\Inflection\Inflector;
 
 /**
  * Receive messages from a queue

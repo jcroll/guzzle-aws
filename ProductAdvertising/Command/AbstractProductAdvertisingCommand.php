@@ -4,7 +4,6 @@ namespace Guzzle\Aws\ProductAdvertising\Command;
 
 use Guzzle\Service\Command\AbstractCommand;
 use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Common\XmlElement;
 
 /**
  * Abstract base command, all commands inherit from this class
@@ -71,7 +70,7 @@ abstract class AbstractProductAdvertisingCommand extends AbstractCommand
         if (strpos($this->getResponse()->getBody(true), '<?xml') !== false) {
             $body = $this->getResponse()->getBody(true);
             $body = preg_replace('# xmlns=[^ >]*#', '', $body);
-            $this->result = new XmlElement($body);
+            $this->result = new \SimpleXMLElement($body);
         }
     }
 }

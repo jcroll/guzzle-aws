@@ -6,13 +6,13 @@
 
 namespace Guzzle\Aws\S3;
 
-use Guzzle\Guzzle;
-use Guzzle\Common\Inspector;
+use Guzzle\Service\Inspector;
 use Guzzle\Http\QueryString;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Plugin\ExponentialBackoffPlugin;
 use Guzzle\Aws\AbstractClient;
+use Guzzle\Http\Utils;
 
 /**
  * Client for interacting with Amazon S3
@@ -61,6 +61,13 @@ class S3Client extends AbstractClient
      */
     protected $forcePathHosting = false;
 
+  /**
+   * @var SignS3RequestPlugin The S3 request signing plugin.  As of Guzzle 2.0, and using the symfony
+   * event dispatcher, you can't easily get event subscribers, so we'll store it here
+   * for our later use
+   */
+  protected $signS3RequestPlugin = null;
+
     /**
      * Get all Amazon S3 region endpoints
      *
@@ -89,7 +96,7 @@ class S3Client extends AbstractClient
      *
      * @return S3Client
      */
-    public static function factory($config)
+    public static function factory($config = array())
     {
         $defaults = array(
             'base_url' => '{{scheme}}://{{region}}/',
@@ -119,18 +126,19 @@ class S3Client extends AbstractClient
 
         // If signing requests, add the request signing plugin
         if ($signature) {
-            $client->getEventManager()->attach(
-                new SignS3RequestPlugin($signature), -99999
+          $client->signS3RequestPlugin = new SignS3RequestPlugin($signature);
+            $client->getEventDispatcher()->addSubscriber(
+                $client->signS3RequestPlugin, -99999
             );
         }
 
         // Retry 500 and 503 failures using exponential backoff
-        $client->getEventManager()->attach(new ExponentialBackoffPlugin());
+        $client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
 
         // If Amazon DevPay tokens were provided, then add a DevPay filter
         if ($config->get('devpay_user_token') && $config->get('devpay_product_token')) {
             // Add the devpay plugin pretty soon in the event emissions
-            $client->getEventManager()->attach(
+            $client->getEventDispatcher()->addSubscriber(
                 new DevPayPlugin(
                     $config->get('devpay_user_token'),
                     $config->get('devpay_product_token')
@@ -198,7 +206,7 @@ class S3Client extends AbstractClient
     public function createRequest($method = RequestInterface::GET, $uri = null, $headers = null, $body = null)
     {
         $request = parent::createRequest($method, $uri, $headers, $body);
-        $request->setHeader('Date', Guzzle::getHttpDate('now'))
+        $request->setHeader('Date', Utils::getHttpDate('now'))
                 ->setHeader('Host', $request->getHost());
 
         return $request;
@@ -226,7 +234,7 @@ class S3Client extends AbstractClient
         if ($this->forcePathHosting) {
             $url = $this->getBaseUrl() . $bucket;
         } else {
-            $url = $this->inject('{{scheme}}://' . $bucket . '.{{region}}/');
+            $url = $this->getConfig()->inject('{scheme}://' . $bucket . '.{region}/');
         }
 
         if ($key) {
@@ -266,8 +274,7 @@ class S3Client extends AbstractClient
         }
 
         $expires = time() + (($duration) ? $duration : 60);
-        $plugin = $this->getEventManager()->getAttached('Guzzle\\Aws\\S3\\SignS3RequestPlugin');
-        $plugin = isset($plugin[0]) ? $plugin[0] : false;
+        $plugin = isset($this->signS3RequestPlugin) ? $this->signS3RequestPlugin : false;
         $isSigned = ($plugin != false);
         $xAmzHeaders = $torrentStr = '';
         $url = 'http://' . $bucket . (($cnamed) ? '' : ('.' . $this->getConfig()->get('region')));
@@ -292,10 +299,25 @@ class S3Client extends AbstractClient
         }
 
         if ($isSigned) {
-            $strToSign = sprintf("GET\n\n\n{$expires}\n{$xAmzHeaders}/%s/%s{$torrentStr}", QueryString::rawurlencode($bucket, array('/')), QueryString::rawurlencode($key, array('/')));
+            $strToSign = sprintf("GET\n\n\n{$expires}\n{$xAmzHeaders}/%s/%s{$torrentStr}", $this->urlEncodeExcludingPathSeparators($bucket), $this->urlEncodeExcludingPathSeparators($key));
             $qs->add('Signature', $plugin->getSignature()->signString($strToSign));
         }
 
         return $url . $qs;
     }
+
+  /**
+   * URL Encode a string, skipping the '/' path separator character.
+   * This replaces the \Guzzle\Http\QueryString::rawurlencode method which
+   * appears to only be used here
+   *
+   * @param $string The string value to be url encoded (except for the '/' path separator character)
+   *
+   * @return string The url encoded string
+   */
+  public static function urlEncodeExcludingPathSeparators($string) {
+    $result = rawurldecode($string);
+    $path_char = rawurldecode('/');
+    return str_replace($path_char, '/', $result);
+  }
 }

@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\SimpleDb;
 
-use Guzzle\Common\Inspector;
+use Guzzle\Service\Inspector;
 use Guzzle\Http\QueryString;
 use Guzzle\Http\Plugin\ExponentialBackoffPlugin;
 use Guzzle\Aws\AbstractClient;
@@ -38,7 +38,7 @@ class SimpleDbClient extends AbstractClient
      *
      * @return CentinelClient
      */
-    public static function factory($config)
+    public static function factory($config = array())
     {
         // Passed config, default config, and required configs
         $config = Inspector::prepareConfig($config, array(
@@ -62,13 +62,13 @@ class SimpleDbClient extends AbstractClient
         $client->setConfig($config);
 
         // Sign the request last
-        $client->getEventManager()->attach(
+        $client->getEventDispatcher()->addSubscriber(
             new QueryStringAuthPlugin($signature, $config->get('version')),
             -9999
         );
 
         // Retry 500 and 503 failures using exponential backoff
-        $client->getEventManager()->attach(new ExponentialBackoffPlugin());
+        $client->GetEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
 
         return $client;
     }

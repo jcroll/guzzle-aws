@@ -6,8 +6,7 @@
 
 namespace Guzzle\Aws\Mws;
 
-use Guzzle\Common\Inspector;
-use Guzzle\Common\Inflector;
+use Guzzle\Service\Inspector;
 use Guzzle\Http\Plugin\ExponentialBackoffPlugin;
 use Guzzle\Aws\AbstractClient;
 use Guzzle\Aws\QueryStringAuthPlugin;
@@ -54,7 +53,7 @@ class MwsClient extends AbstractClient
      *
      * @return MwsClient
      */
-    public static function factory($config)
+    public static function factory($config = array())
     {
         $defaults = array(
             'base_url' => 'https://mws.amazonservices.com/',
@@ -77,13 +76,13 @@ class MwsClient extends AbstractClient
         $client->setConfig($config);
 
         // Sign the request last
-        $client->getEventManager()->attach(
+        $client->getEventDispatcher()->addSubscriber(
             new QueryStringAuthPlugin($signature, $config->get('version')),
             -9999
         );
 
         // Retry 500 and 503 failures, up to 3 times
-        $client->getEventManager()->attach(new ExponentialBackoffPlugin(3, null, function($try){
+        $client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin(3, null, function($try){
             // @codeCoverageIgnoreStart
             return 60;
             // @codeCoverageIgnoreEnd

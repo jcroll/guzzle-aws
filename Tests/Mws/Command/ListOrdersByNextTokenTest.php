@@ -8,7 +8,7 @@ use Guzzle\Tests\GuzzleTestCase;
 /**
  * @covers Guzzle\Aws\Mws\Command\ListOrdersByNextToken
  */
-class ListOrdersByNextTokenTest extends \Guzzle\Tests\GuzzleTest
+class ListOrdersByNextTokenTest extends \Guzzle\Tests\GuzzleTestCase
 {
     public function testListOrdersByNextToken()
     {

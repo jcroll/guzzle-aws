@@ -19,39 +19,45 @@ use Guzzle\Common\Collection;
  */
 class DeleteAttributes extends AbstractAttributeCommand
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected $action = 'DeleteAttributes';
+  /**
+   * {@inheritdoc}
+   */
+  protected $action = 'DeleteAttributes';
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function build()
-    {
-        parent::build();
-        foreach ($this->getAll('/^Expected\.[0-9]+\.(Name|Value|Exists)$/', Collection::MATCH_REGEX) as $key => $value) {
-            $this->request->getQuery()->set($key, $value);
-        }
+  /**
+   * {@inheritdoc}
+   */
+  protected function build()
+  {
+    parent::build();
+    $params = $this->filter(function ($key, $value) {
+      return $key != 'headers' && preg_match('/^Expected\.[0-9]+\.(Name|Value|Exists)$/', $key);
+    });
+    foreach ($params as $key => $value) {
+      $this->request->getQuery()->set($key, $value);
     }
+  }
 
-    /**
-     * Add an expected condition to the command
-     *
-     * @param string $name The attribute name to check
-     * @param string $value The value to check on the attribute
-     * @param bool $replace (optional) Set to TRUE to test the existence of an
-     *      attribute
-     *
-     * @return DeleteAttributes
-     */
-    public function addExpected($name, $value, $exists = false)
-    {
-        $count = (int) count($this->getAll('/^Expected\.[0-9]+\.(Name|Value|Exists)$/', Collection::MATCH_REGEX));
-        $this->set("Expected.{$count}.Name", (string) $name);
-        $this->set("Expected.{$count}.Value", (string) $value);
-        $this->set("Expected.{$count}.Exists", ($exists) ? 'true' : 'false');
+  /**
+   * Add an expected condition to the command
+   *
+   * @param string $name The attribute name to check
+   * @param string $value The value to check on the attribute
+   * @param bool $replace (optional) Set to TRUE to test the existence of an
+   *      attribute
+   *
+   * @return DeleteAttributes
+   */
+  public function addExpected($name, $value, $exists = false)
+  {
+    $params = $this->filter(function ($key, $value) {
+      return $key != 'headers' && preg_match('/^Expected\.[0-9]+\.(Name|Value|Exists)$/', $key);
+    });
+    $count = (int)count($params);
+    $this->set("Expected.{$count}.Name", (string)$name);
+    $this->set("Expected.{$count}.Value", (string)$value);
+    $this->set("Expected.{$count}.Exists", ($exists) ? 'true' : 'false');
 
-        return $this;
-    }
+    return $this;
+  }
 }

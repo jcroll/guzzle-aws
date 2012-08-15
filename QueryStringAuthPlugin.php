@@ -6,13 +6,12 @@
 
 namespace Guzzle\Aws;
 
-use Guzzle\Common\Event\Observer;
-use Guzzle\Common\Event\Subject;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Aws\Filter\AddRequiredQueryStringFilter;
-use Guzzle\Aws\Filter\QueryStringSignatureFilter;
 
-class QueryStringAuthPlugin implements Observer
+use Guzzle\Common\Event;
+use Guzzle\Http\Message\RequestInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class QueryStringAuthPlugin implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -103,12 +102,25 @@ class QueryStringAuthPlugin implements Observer
 
     /**
      * {@inheritdoc}
+     * DEPRECATED replaced by onBeforeSend below.
      */
-    public function update(Subject $subject, $event, $context = null)
+    /*public function update(Subject $subject, $event, $context = null)
     {
         if ($subject instanceof RequestInterface && $event == 'request.before_send') {
             $this->addRequiredQueryString($subject);
             $this->addQueryStringSignature($subject);
         }
-    }
+    }*/
+
+  public function onBeforeSend(Event $event) {
+    $this->addRequiredQueryString($event['request']);
+    $this->addQueryStringSignature($event['request']);
+  }
+
+
+  public static function getSubscribedEvents() {
+    return array(
+      'request.before_send'      => 'onBeforeSend'
+    );
+  }
 }

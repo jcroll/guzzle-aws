@@ -69,7 +69,7 @@ class ListBucket extends AbstractS3BucketCommand
              $this->result = $xml;
         } else {
             $className = $this->bucketIterator;
-            $this->result = call_user_func(array($className, 'factory'), $this->client, $xml, $this->get('limit', -1));
+            $this->result = call_user_func(array($className, 'factory'), $this, $xml, $this->get('limit', -1));
         }
     }
 

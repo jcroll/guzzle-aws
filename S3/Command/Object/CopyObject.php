@@ -10,7 +10,7 @@ use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Aws\S3\S3Client;
 use Guzzle\Http\QueryString;
 use Guzzle\Http\Message\Request;
-use Guzzle\Guzzle;
+use Guzzle\Http\Utils;
 
 /**
  * Copy an object from one location to another
@@ -41,7 +41,7 @@ class CopyObject extends AbstractRequestObject
 
         // Set the PUT copy specific headers
         
-        $this->request->setHeader('x-amz-copy-source', QueryString::rawurlencode($this->get('copy_source'), array('/')));
+        $this->request->setHeader('x-amz-copy-source', S3Client::urlEncodeExcludingPathSeparators($this->get('copy_source')));
 
         if ($this->get('metadata_directive')) {
             $this->request->setHeader('x-amz-metadata-directive', strtoupper($this->get('metadata_directive')));
@@ -178,7 +178,7 @@ class CopyObject extends AbstractRequestObject
      */
     public function setCopySourceIfUnmodifiedSince($date)
     {
-        return $this->set('copy_source_if_unmodified_since', Guzzle::getHttpDate($date));
+        return $this->set('copy_source_if_unmodified_since', Utils::getHttpDate($date));
     }
 
     /**
@@ -192,6 +192,6 @@ class CopyObject extends AbstractRequestObject
      */
     public function setCopySourceIfModifiedSince($date)
     {
-        return $this->set('copy_source_if_modified_since', Guzzle::getHttpDate($date));
+        return $this->set('copy_source_if_modified_since', Utils::getHttpDate($date));
     }
 }

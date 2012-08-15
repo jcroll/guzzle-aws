@@ -23,7 +23,9 @@ class SqsClientTest extends \Guzzle\Tests\GuzzleTestCase
             'secret_key' => 'b'
         ));
         $this->assertInstanceOf('Guzzle\\Aws\\Sqs\\SqsClient', $client);
-        // Make sure the query string auth signing plugin was attached
-        $this->assertTrue($client->getEventManager()->hasObserver('Guzzle\Aws\QueryStringAuthPlugin'));
+
+
+        $listeners = $client->getEventDispatcher()->getListeners('request.before_send');
+        $this->assertInstanceOf('Guzzle\\Aws\\QueryStringAuthPlugin', $listeners[0][0]);
     }
 }

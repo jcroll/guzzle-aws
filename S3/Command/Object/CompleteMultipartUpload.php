@@ -9,7 +9,7 @@ namespace Guzzle\Aws\S3\Command\Object;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
 use Guzzle\Http\EntityBody;
-use Guzzle\Http\Message\BadResponseException;
+use Guzzle\Http\Exception\BadResponseException;
 
 /**
  * This operation completes a multipart upload

@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\SimpleDb\Model;
 
-use Guzzle\Service\ResourceIterator;
+use Guzzle\Service\Resource\ResourceIterator;
 use Guzzle\Aws\SimpleDb\Command\Select;
 use Guzzle\Aws\SimpleDb\SimpleDbClient;
 

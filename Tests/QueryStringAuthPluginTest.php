@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\Tests;
 
-use Guzzle\Common\Event\EventManager;
+use Guzzle\Common\Event;
 use Guzzle\Http\Message\RequestFactory;
 use Guzzle\Service\Command\CommandSet;
 use Guzzle\Aws\Signature\SignatureV2;
@@ -28,10 +28,10 @@ class QueryStringAuthPluginTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertSame($signature, $plugin->getSignature());
         $this->assertEquals('2009-04-15', $plugin->getApiVersion());
 
-        $request = RequestFactory::get('http://www.test.com/');
-        $request->getEventManager()->attach($plugin);
+        $request = RequestFactory::getInstance()->create('get', 'http://www.test.com/');
+        $request->getEventDispatcher()->addSubscriber($plugin);
         
-        $request->getEventManager()->notify('request.before_send');
+        $request->getEventDispatcher()->dispatch('request.before_send', new Event(array('request' => $request)));
         
         $qs = $request->getQuery();
         $this->assertTrue($qs->hasKey('Timestamp') !== false);
@@ -47,17 +47,18 @@ class QueryStringAuthPluginTest extends \Guzzle\Tests\GuzzleTestCase
     public function testAddsAuthWhenUsingCommandSets()
     {
         $client = $this->getServiceBuilder()->get('test.simple_db');
-        $this->assertTrue($client->getEventManager()->hasObserver('Guzzle\\Aws\\QueryStringAuthPlugin'));
+        $listeners = $client->getEventDispatcher()->getListeners('request.before_send');
+        $this->assertInstanceOf('Guzzle\\Aws\\QueryStringAuthPlugin', $listeners[0][0]);
 
         $this->setMockResponse($client, array(
             'sdb/DeleteDomainResponse',
             'sdb/CreateDomainResponse'
         ));
 
-        $set = new CommandSet(array(
+        $set = array(
             $client->getCommand('delete_domain', array('domain' => '123')),
             $client->getCommand('create_domain', array('domain' => '123')),
-        ));
+        );
 
         $client->execute($set);
 

@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\Sqs;
 
-use Guzzle\Common\Inspector;
+use Guzzle\Service\Inspector;
 use Guzzle\Http\Plugin\ExponentialBackoffPlugin;
 use Guzzle\Aws\AbstractClient;
 use Guzzle\Aws\QueryStringAuthPlugin;
@@ -37,7 +37,7 @@ class SqsClient extends AbstractClient
      *
      * @return SqsClient
      */
-    public static function factory($config)
+    public static function factory($config = array())
     {
         // Passed config, default config, and required configs
         $config = Inspector::prepareConfig($config, array(
@@ -61,13 +61,13 @@ class SqsClient extends AbstractClient
         $client->setConfig($config);
 
         // Sign the request last
-        $client->getEventManager()->attach(
+        $client->getEventDispatcher()->addSubscriber(
             new QueryStringAuthPlugin($signature, $config->get('version')),
             -9999
         );
 
         // Retry 500 and 503 failures using exponential backoff
-        $client->getEventManager()->attach(new ExponentialBackoffPlugin());
+        $client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
 
         return $client;
     }

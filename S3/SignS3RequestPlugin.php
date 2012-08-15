@@ -6,16 +6,15 @@
 
 namespace Guzzle\Aws\S3;
 
-use Guzzle\Common\Event\Observer;
-use Guzzle\Common\Event\Subject;
-use Guzzle\Http\Plugin\AbstractPlugin;
+use Guzzle\Common\Event;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Plugin to sign requests for Amazon S3 before sending
  *
  * @author Michael Dowling <michael@guzzlephp.org>
  */
-class SignS3RequestPlugin implements Observer
+class SignS3RequestPlugin implements EventSubscriberInterface
 {
     /**
      * @var S3Signature
@@ -67,4 +66,29 @@ class SignS3RequestPlugin implements Observer
             );
         }
     }
+
+  public function onBeforeSend(Event $event) {
+    $subject = $event['request'];
+    $path = $subject->getUrl() ? : '';
+    $headers = array_change_key_case($subject->getHeaders()->getAll());
+    if (!array_key_exists('Content-Length', $headers)) {
+      $headers['Content-Type'] = $subject->getHeader('Content-Type');
+    }
+
+    $canonicalizedString = $this->signature->createCanonicalizedString(
+      $headers, $path, $subject->getMethod()
+    );
+
+    $subject->setHeader(
+      'Authorization',
+      'AWS ' . $this->signature->getAccessKeyId(). ':'
+            . $this->signature->signString($canonicalizedString)
+    );
+  }
+
+  public static function getSubscribedEvents() {
+    return array(
+      'request.before_send'      => 'onBeforeSend'
+    );
+  }
 }

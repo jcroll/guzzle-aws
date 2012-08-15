@@ -2,4 +2,10 @@ phpunit.xml
 coverage
 nbproject
 /.svn/
-composer.lock
+.buildpath
+.settings
+.project
+vendor
+*.iml
+*.ipr
+*.iws

@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws\S3\Model;
 
-use Guzzle\Service\ResourceIterator;
+use Guzzle\Service\Resource\ResourceIterator;
 use Guzzle\Aws\S3\S3Client;
 use Guzzle\Aws\S3\Command\Object\ListParts;
 use Guzzle\Aws\S3\S3Exception;
