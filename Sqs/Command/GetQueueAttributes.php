@@ -43,7 +43,7 @@ class GetQueueAttributes extends AbstractQueueUrlCommand
 
         $this->result = array();
         foreach ($this->xmlResult->GetQueueAttributesResult->Attribute as $attribute) {
-            $this->result[Inflector::snake(trim((string)$attribute->Name))] = trim((string)$attribute->Value);
+            $this->result[Inflector::getDefault()->snake(trim((string)$attribute->Name))] = trim((string)$attribute->Value);
         }
     }
 

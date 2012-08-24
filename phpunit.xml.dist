@@ -24,6 +24,7 @@
             <directory suffix="Test.php">./Tests/ProductAdvertising</directory>
             <directory suffix="Test.php">./Tests/Signature</directory>
             <directory suffix="Test.php">./Tests/Sqs</directory>
+            <!-- TODO: Only these pass, nothing else -->
         </testsuite>
     </testsuites>
 

@@ -67,7 +67,7 @@ class ReceiveMessage extends AbstractQueueUrlCommand
             );
 
             foreach ($message->Attribute as $attribute) {
-                $row[Inflector::snake(trim((string)$attribute->Name))] = trim((string)$attribute->Value);
+                $row[Inflector::getDefault()->snake(trim((string)$attribute->Name))] = trim((string)$attribute->Value);
             }
 
             $this->result[] = $row;

@@ -65,7 +65,7 @@ class AbstractMwsCommand extends AbstractCommand
             if ($param == 'headers') {
                 continue;
             }
-            $param = ucfirst(Inflector::camel($param));
+            $param = ucfirst(Inflector::getDefault()->camel($param));
             if (is_array($value)) {
                 // It's an array, convert to amazon array naming convention
                 foreach ($value as $listName => $listValues) {
@@ -116,7 +116,7 @@ class AbstractMwsCommand extends AbstractCommand
 
             // Iterable result
             if ($this instanceof AbstractIterableMwsCommand || $this instanceof AbstractIterableMwsOrderCommand) {
-                $nextCommand = Inflector::snake($this->action . 'ByNextToken');
+                $nextCommand = Inflector::getDefault()->snake($this->action . 'ByNextToken');
 
                 $records = $this->result;
                 if ($this->recordPath) {
