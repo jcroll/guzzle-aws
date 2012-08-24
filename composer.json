@@ -20,6 +20,6 @@
         "guzzle/guzzle": ">=2.0.0"
     },
     "autoload": {
-        "psr-0": { "Guzzle\\Aws": "/" }
+        "psr-0": { "Guzzle\\Aws": "/src" }
     }
 }

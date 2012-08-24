@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 spl_autoload_register(function($class) {
     if (0 === strpos($class, 'Guzzle\\Aws\\')) {
         $path = implode('/', array_slice(explode('\\', $class), 2)) . '.php';
-        require_once __DIR__ . '/../' . $path;
+        require_once __DIR__ . '/../src/Guzzle/Aws/' . $path;
         return true;
     }
 });
