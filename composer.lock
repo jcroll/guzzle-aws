@@ -1,13 +1,126 @@
 {
-    "hash": "0a8c9b506c1969b0513a990c63f8319a",
+    "hash": "1ffd06bdaab867506ca6cb3452d6ae22",
     "packages": [
         {
-            "package": "guzzle/guzzle",
-            "version": "v2.7.2"
+            "name": "guzzle/guzzle",
+            "version": "v2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle",
+                "reference": "v2.7.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/guzzle/guzzle/zipball/v2.7.2",
+                "reference": "v2.7.2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.2",
+                "symfony/event-dispatcher": "2.*"
+            },
+            "replace": {
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/parser": "self.version"
+            },
+            "require-dev": {
+                "doctrine/common": "*",
+                "monolog/monolog": "1.*",
+                "symfony/class-loader": "*",
+                "zend/zend-cache1": "1.11",
+                "zend/zend-log1": "1.11",
+                "zendframework/zend-cache": "2.0.*",
+                "zendframework/zend-eventmanager": "2.0.*",
+                "zendframework/zend-loader": "2.0.*",
+                "zendframework/zend-log": "2.0.*",
+                "zendframework/zend-servicemanager": "2.0.*",
+                "zendframework/zend-stdlib": "2.0.*"
+            },
+            "time": "2012-07-02 14:04:37",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Tests": "tests/",
+                    "Guzzle": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ]
         },
         {
-            "package": "symfony/event-dispatcher",
-            "version": "v2.0.16"
+            "name": "symfony/event-dispatcher",
+            "version": "v2.1.8",
+            "target-dir": "Symfony/Component/EventDispatcher",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/EventDispatcher.git",
+                "reference": "v2.1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.1.8",
+                "reference": "v2.1.8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/dependency-injection": "2.1.*"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "2.1.*",
+                "symfony/http-kernel": "2.1.*"
+            },
+            "time": "2013-02-11 11:26:14",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\EventDispatcher": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "http://symfony.com"
         }
     ],
     "packages-dev": null,

@@ -1,44 +1,44 @@
 <?php
-/**
- * @package Guzzle PHP <http://www.guzzlephp.org>
- * @license See the LICENSE file that was distributed with this source code.
- */
 
-namespace Guzzle\Aws\Mws\Command;
+namespace Guzzle\Aws\Mws\Model;
 
-/**
- * Get a list of reports matching the given parameters
- *
- * Documentation:
- * The GetReportList operation returns a list of reports within the previous 90 days that match
- * the query parameters. The maximum number of results that will be returned in one call is one
- * hundred. If there are additional results to return, HasNext will be returned in the response
- * with a true value. To retrieve all the results, you can use the value of the NextToken
- * parameter to call GetReportListByNextToken until HasNext is false.
- *
- * Calls to GetReportList are limited to one request per minute, included within the overall
- * limit of 1,000 calls per seller account per hour.
- *
- * @author Harold Asbridge <harold@shoebacca.com>
- *
- * @guzzle max_count doc="Maximum number of reports to return"
- * @guzzle report_type_list doc="An array of ReportTypes by which to filter reports"
- * @guzzle acknowledged doc="set to true to list acknowledged reports"
- * @guzzle available_from_date doc="Earliest report date"
- * @guzzle available_to_date doc="Most recent report date"
- * @guzzle report_request_id_list doc="An array of report request IDs"
- */
-class GetReportList extends AbstractMwsCommand
-{
-    /**
-     * {@inheritdoc}
-     */
-    protected $action = 'GetReportList';
+use Guzzle\Service\Resource\ResourceIterator;
 
-    /**
-     * {@inheritdoc}
-     */
-    protected $recordPath = '//ReportInfo';
+class GetReportListIterator extends ResourceIterator {
+  protected function sendRequest() {
+    $permitted_options = array(
+      'max_count',
+      'report_type_list',
+      'acknowledged',
+      'available_from_date',
+      'available_to_date',
+      'report_request_id_list'
+    );
+    if($this->nextToken) {
+      $this->command->set('next_token', $this->nextToken);
+    }
+
+    foreach($this->data as $k => $param) {
+      if(in_array($k, $permitted_options)) {
+        $this->command->set($k, $param);
+      }
+    }
+
+    # Prefer max_count over limit, but use limit if it is supplied.
+    if(!in_array('max_count', array_keys($this->data)) && $this->data['limit'] > 0) {
+      $this->command->set('max_count', $this->data['limit']);
+    }
+
+    $result = $this->command->execute();
+
+    if ((string) $result->HasNext == 'true') {
+      $this->nextToken = (string) $result->NextToken;
+    } else {
+      $this->nextToken = null;
+    }
+
+    return $result;
+  }
 
     /**
      * Set the maximum number of results to return
