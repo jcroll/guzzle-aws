@@ -29,9 +29,14 @@ class ResultIterator extends ResourceIterator
         // Throttle requests by waiting 1 second
         sleep(1);
 
-      $command = $this->command->setNextToken($this->getNextToken());
-      $response = $this->command->execute();
-      $this->processResult($response);
+      $response = null;
+      if($this->nextToken) {
+        $client = $this->originalCommand->getClient();
+        $command = $client->getCommand($this->data['next_command'])
+          ->setNextToken($this->getNextToken());
+        $response = $client->execute($command);
+        $this->processResult($response);
+      }
     }
 
     /**

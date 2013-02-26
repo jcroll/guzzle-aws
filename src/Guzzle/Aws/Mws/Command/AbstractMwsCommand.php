@@ -80,7 +80,7 @@ class AbstractMwsCommand extends AbstractCommand
             } else if (is_bool($value)) {
                 // It's a bool, convert to string
                 $this->request->getQuery()->set($param, $value ? 'true' : 'false');
-            } else {
+            } else if (isset($value)) {
                 // It's a scalar
                 $this->request->getQuery()->set($param, $value);
             }
