@@ -44,12 +44,12 @@ abstract class AbstractProductAdvertisingCommand extends AbstractCommand
         
         // Add operation and associate tag to request
         $this->request->getQuery()
-            ->set('Operation', $this->operation)
+            ->set('Operation', substr(strrchr($this->operation->getName(), '\\'), 1))
             ->set('AssociateTag', $config['associate_tag']);
         
         // Add parameters to request
         foreach($this->data as $param => $value) {
-            if ($param == 'headers') {
+            if (strpos($param, 'command') !== false) {
                 continue;
             }
             if (is_bool($value)) {
