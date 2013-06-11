@@ -6,7 +6,7 @@
 
 namespace Guzzle\Aws;
 
-use Guzzle\Common\GuzzleException;
+use Guzzle\Common\Exception\GuzzleException;
 
 /**
  * Amazon Web Services exception

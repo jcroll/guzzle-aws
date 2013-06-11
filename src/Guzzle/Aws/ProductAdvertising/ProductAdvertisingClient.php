@@ -5,8 +5,7 @@ namespace Guzzle\Aws\ProductAdvertising;
 use Guzzle\Aws\AbstractClient;
 use Guzzle\Aws\QueryStringAuthPlugin;
 use Guzzle\Aws\Signature\SignatureV2;
-use Guzzle\Service\Inspector;
-use Guzzle\Common\Inflector;
+use Guzzle\Common\Collection;
 
 /**
  * Product Advertising API client class
@@ -35,7 +34,8 @@ class ProductAdvertisingClient extends AbstractClient
             'version' => self::VERSION
         );
         $required = array('access_key', 'secret_key');
-        $config = Inspector::prepareConfig($config, $defaults, $required);
+//        $config = Inspector::prepareConfig($config, $defaults, $required);
+        $config = Collection::fromConfig($config, $defaults, $required);
 
         $signature = new SignatureV2($config->get('access_key'), $config->get('secret_key'));
         $client = new self(
